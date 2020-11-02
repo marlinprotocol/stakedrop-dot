@@ -1,0 +1,15 @@
+module.exports = {
+  latestEra: "latestEra_polkadot",
+  lastProcessedEra: "lastProcessedEra_polkadot",
+  lastConfirmedEra: "lastConfirmedEra_polkadot",
+  lastConfirmedEraForValidators: "lastConfirmedEraForValidators_polkadot",
+  lastConfirmedEraForDelegators: "lastConfirmedEraForDelegators_polkadot",
+  rewardStartEra: "rewardStartEra_polkadot",
+  latestBlock: "latestBlock_polkadot",
+  lastConfirmedBlock: "latestConfirmedBlock_polkadot",
+  feederEra: "feederEra_polkadot",
+  totalStakeFeeder: "totalStakeFeeder_polkadot",
+  validatorStakeFeeder: "validatorStakeFeeder_polkadot",
+  delegatorStakeFeeder: "delegatorStakeFeeder_polkadot",
+  freezeEra: "freezeEra_polkadot",
+};

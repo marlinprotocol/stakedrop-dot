@@ -1,0 +1,41 @@
+version: '3.5'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+    depends_on: 
+      - mongo
+  app:
+    build: ./backend
+    environment:
+      START_ERA: 1
+      CHAIN_START_ERA: 80
+      CHAIN_START_BLOCK: 1
+      STAKE_DROP: "start"
+      ONLY_WHITE_LISTED_VALIDATORS: "false" #if false, all validators will be considered
+      ONLY_REGISTERED_ADDRESSES: "false" #if false, all delegators will be rewarded
+      HTTP_WEB3_PROVIDER: "http://34.93.40.96:8545"
+      PRE_SHARED_KEY: "abcd1234"
+      SIGNER_KEY: "74178a8927f7ee15056cba14d360aaf02cd2f865a15c732cdfabf49da512e0eb"
+      DEPOSIT_ADDRESS: "12miGsbCdw3u4jZ1uXpWtYXzbSUTS44SavSANbLQL6i9jPKu"
+      SIGNER_ADDRESS: "0x3dB4c831D9E2B727c803600f4F3a6a7295B624f3"
+      CONTRACT_ADDRESS: "0x4a629725ce263ea11af0cd142aadeba9735a9bbd"
+      FEED_URL: "http://172.17.0.1:3000/polkadot"
+    volumes:
+      - ./backend:/home/app
+    ports:
+      - 3001:3000
+    depends_on: 
+      - mongo
+      - mongo-express
