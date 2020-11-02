@@ -20,7 +20,7 @@ services:
     build: ./backend
     environment:
       START_ERA: 1
-      CHAIN_START_ERA: 80
+      CHAIN_START_ERA: 96
       CHAIN_START_BLOCK: 1
       STAKE_DROP: "start"
       ONLY_WHITE_LISTED_VALIDATORS: "false" #if false, all validators will be considered

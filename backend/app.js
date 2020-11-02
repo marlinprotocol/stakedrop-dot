@@ -33,11 +33,11 @@ ApiPromise.create({ provider })
     return;
   })
   .then(function () {
-    polkadot.saveValidators();
+    // polkadot.saveValidators();
     return;
   })
   .then(function () {
-    polkadot.feeder();
+    // polkadot.feeder();
     return;
   })
   .then(function () {
