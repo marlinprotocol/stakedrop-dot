@@ -1,7 +1,9 @@
+require("./config/checkEnv");
 const { ApiPromise, WsProvider } = require("@polkadot/api");
 const { HttpProvider } = require("@polkadot/rpc-provider");
 // const provider = new WsProvider("ws://172.17.0.1:9944/");
-const provider = new HttpProvider("http://34.93.40.96:4443/");
+const polkadotRpcUrl = process.env.POLKADOT_RPC;
+const provider = new HttpProvider(polkadotRpcUrl);
 
 //global
 mongoose = require("mongoose");
@@ -12,7 +14,14 @@ const options = {
 };
 // use promise latter
 try {
-  mongoose.connect("mongodb://admin:password@mongo:27017/admin", options);
+  let user = process.env.MONGO_USER || "admin";
+  let password = process.env.MONGO_PASSWORD || "password";
+  let mongo_url = process.env.MONGO_URL || "mongo:27017";
+  let dbName = process.env.MONGO_DB_NAME || "admin";
+  mongoose.connect(
+    `mongodb://${user}:${password}@${mongo_url}/${dbName}`,
+    options
+  );
 } catch (ex) {
   console.log(ex);
   process.exit(1);

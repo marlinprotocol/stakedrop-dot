@@ -1,12 +1,20 @@
 const { Keyring } = require("@polkadot/api");
 const keyring = new Keyring({ type: "sr25519" });
+
 const ethereum_address = require("ethereum-address");
-const { stringToU8a, u8aToHex, hexToU8a } = require("@polkadot/util");
+
 const {
   registeredAddresses,
   transactions,
   whitelistedValidators,
+  registrations,
+  params,
 } = require("../models");
+
+const { polkadot: polkadotConstants } = require("../constants");
+
+const registrationConfirmationBlocks =
+  process.env.REGISTRATION_CONFIRMATION_BLOCK || 14400;
 
 const checkEthereumAddress = () => async (req, res, next) => {
   try {
@@ -103,10 +111,47 @@ const unregisterAddress = () => async (req, res, next) => {
 
 const validateTransactionHash = () => async (req, res, next) => {
   try {
+    let { ethereumAddress, stakingAddress } = req.body;
+    if (ethereumAddress.length == 42) {
+      ethereumAddress = ethereumAddress.split("x")[1];
+    }
+    ethereumAddress = ethereumAddress.toLowerCase();
     let { transactionHash } = req.body;
     let _data = await transactions.findOne({ transactionHash });
     if (_data) {
-      return next();
+      let { method, args, blockNumber } = _data;
+      if (method == "transfer") {
+        let { dest } = args;
+        let registrationDetails = await registrations.findOne({
+          address: stakingAddress,
+          ethereumAddress,
+        });
+        if (registrationDetails) {
+          let addressToReceive =
+            registrationDetails.depositDetails.pair.address;
+          if (dest == addressToReceive) {
+            let latestBlock = await params.find(polkadotConstants.latestBlock);
+            if (
+              latestBlock.value >
+              blockNumber + registrationConfirmationBlocks
+            ) {
+              return next(
+                "Transaction should be sent less than 24 hours ago. Create a new one if it exceeds"
+              );
+            } else {
+              return next();
+            }
+          } else {
+            return next(
+              `To Confirm your registration make sure you have sent 0.01 Dots to your regsitration address ${addressToReceive}`
+            );
+          }
+        } else {
+          return next(`You havent created any registration deposit address`);
+        }
+      } else {
+        return next(`${transactionHash} should create an unbatched transfer`);
+      }
     } else {
       return next(`${transactionHash} not found`);
     }

@@ -1,6 +1,7 @@
 const { params } = require("../models");
 const { polkadot } = require("../constants");
 const chainStartEra = parseInt(process.env.CHAIN_START_ERA);
+const chainStartBlock = parseInt(process.env.CHAIN_START_BLOCK);
 
 async function init() {
   let latestEra = await params.findOne({ param: polkadot.latestEra });
@@ -21,10 +22,10 @@ async function init() {
     await confirmedEra.save();
   }
 
-  await check(polkadot.lastConfirmedEraForValidators, 1);
-  await check(polkadot.lastConfirmedEraForDelegators, 1);
-  await check(polkadot.lastConfirmedBlock, 1);
-  await check(polkadot.latestBlock, 1);
+  await check(polkadot.lastConfirmedEraForValidators, chainStartEra);
+  await check(polkadot.lastConfirmedEraForDelegators, chainStartEra);
+  await check(polkadot.lastConfirmedBlock, chainStartBlock);
+  await check(polkadot.latestBlock, chainStartBlock);
 
   await check(polkadot.feederEra, chainStartEra);
   await check(polkadot.totalStakeFeeder, chainStartEra);
