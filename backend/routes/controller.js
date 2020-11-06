@@ -4,8 +4,13 @@ const {
   registeredAddresses,
   transactions,
   b_delegators,
+  delegators,
+  u_delegators,
   whitelistedValidators,
+  params,
 } = require("../models");
+
+const { polkadot: polkadotConstants } = require("../constants");
 
 const bip39 = require("bip39");
 const { Keyring } = require("@polkadot/api");
@@ -107,8 +112,8 @@ async function register(obj) {
       let _v = "unregistered validator: ";
       if (blackListedRewards && blackListedRewards.validatorAddress) {
         _v = _v + blackListedRewards.validatorAddress;
+        info.message = `Your staking address has been delegating to ${_v}`;
       }
-      info.message = `Your staking address has been delegating to ${_v}`;
       let _data = await whitelistedValidators.find();
       info.whitelistedValidators = _data.map(function (obj) {
         return obj.validatorAddress;
@@ -124,6 +129,14 @@ async function register(obj) {
     console.log(error);
     return { status: false };
   }
+}
+
+async function getWhiteListedValidators() {
+  let _data = await whitelistedValidators.find();
+  _data = _data.map(function (obj) {
+    return obj.validatorAddress;
+  });
+  return _data;
 }
 
 async function unregister(obj) {
@@ -174,7 +187,78 @@ async function averageStakePerEpoch() {
   return average.toNumber();
 }
 
+async function getOneStakeData(delegatorAddress, era) {
+  let _validStake = await delegators.findOne({ delegatorAddress, era });
+  let _unregisteredStake = await u_delegators.findOne({
+    delegatorAddress,
+    era,
+  });
+  let _blackListedStake = await b_delegators.findOne({ delegatorAddress, era });
+  // console.log({ _validStake, _unregisteredStake, _blackListedStake });
+  return { _validStake, _unregisteredStake, _blackListedStake };
+}
+
+async function getStakeData(delegatorAddress) {
+  let { value: lastConfirmedEra } = await params.findOne({
+    param: polkadotConstants.feederEra,
+  });
+
+  let stakeElligibleForReward = [];
+  let stakeBeforeRegistration = [];
+  let stakeDelegatedToBlackListedValidator = [];
+
+  for (let index = lastConfirmedEra - 1; index > 0; index--) {
+    let {
+      _validStake,
+      _unregisteredStake,
+      _blackListedStake,
+    } = await getOneStakeData(delegatorAddress, index);
+
+    if (_validStake) {
+      stakeElligibleForReward.push({
+        era: index,
+        stake: _validStake.delegatorStake,
+      });
+    } else {
+      stakeElligibleForReward.push({
+        era: index,
+        stake: 0,
+      });
+    }
+
+    if (_unregisteredStake) {
+      stakeBeforeRegistration.push({
+        era: index,
+        stake: _unregisteredStake.delegatorStake,
+      });
+    } else {
+      stakeBeforeRegistration.push({
+        era: index,
+        stake: 0,
+      });
+    }
+
+    if (_blackListedStake) {
+      stakeDelegatedToBlackListedValidator.push({
+        era: index,
+        stake: _blackListedStake.delegatorStake,
+      });
+    } else {
+      stakeDelegatedToBlackListedValidator.push({
+        era: index,
+        stake: 0,
+      });
+    }
+  }
+  return {
+    stakeElligibleForReward,
+    stakeBeforeRegistration,
+    stakeDelegatedToBlackListedValidator,
+  };
+}
+
 module.exports = {
+  getStakeData,
   totalValueLocked,
   getDepositAddress,
   isEthereumAddressRegistered,
@@ -185,4 +269,5 @@ module.exports = {
   addValidator,
   removeValidator,
   averageStakePerEpoch,
+  getWhiteListedValidators,
 };

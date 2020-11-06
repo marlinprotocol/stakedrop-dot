@@ -13,7 +13,10 @@ const {
   addValidator,
   removeValidator,
   averageStakePerEpoch,
+  getStakeData,
+  getWhiteListedValidators,
 } = require("./controller");
+
 const {
   checkEthereumAddress,
   checkPolkadotAddress,
@@ -34,6 +37,8 @@ const {
   unregisterPayload,
   validatorListingPayload,
 } = require("./requestPayLoadChecks");
+
+const contractDetails = require("../config/contracts");
 
 module.exports = router;
 
@@ -102,7 +107,7 @@ router.get(
 router.post(
   "/register",
   validate(registerPayload),
-  validateTransactionHash(),
+  // validateTransactionHash(),
   checkRegisterPayload(),
   r1(),
   r2(),
@@ -118,7 +123,7 @@ router.post(
 router.post(
   "/unregister",
   validate(unregisterPayload),
-  validateTransactionHash(),
+  // validateTransactionHash(),
   checkUnregisterPayload(),
   u1(),
   async (req, res, next) => {
@@ -130,9 +135,7 @@ router.post(
 );
 
 router.get("/contractAddress", async (req, res, next) => {
-  return res.status(httpStatus.OK).json({
-    contractAddress: process.env.CONTRACT_ADDRESS,
-  });
+  return res.status(httpStatus.OK).json(contractDetails);
 });
 
 router.get(
@@ -182,4 +185,18 @@ router.post(
 router.get("/averageStakePerEpoch", async (req, res, next) => {
   let value = await averageStakePerEpoch();
   return res.status(httpStatus.OK).json({ value });
+});
+
+router.get(
+  "/stakeData/:stakingAddress",
+  checkPolkadotAddress(),
+  async (req, res, next) => {
+    let data = await getStakeData(req.params.stakingAddress);
+    return res.status(httpStatus.OK).json(data);
+  }
+);
+
+router.get("/getWhitelistedValidators", async (req, res, next) => {
+  let data = await getWhiteListedValidators();
+  return res.status(httpStatus.OK).json(data);
 });

@@ -10,7 +10,7 @@ services:
     image: mongo-express
     restart: always
     ports:
-      - 8081:8081
+      - 6000:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
@@ -20,15 +20,17 @@ services:
     build: ./backend
     environment:
       NODE_ENV: dev
-      CHAIN_START_ERA: 154 # the era at which chain starts rewarding the delegators
-      CHAIN_START_BLOCK: 2000000 # the block at which chain starts parsing
+      CHAIN_START_ERA: 1 # the era at which chain starts rewarding the delegators
+      CHAIN_START_BLOCK: 1 # the block at which chain starts parsing
       STAKE_DROP: "start" # if other value or undefined, stake drop will be paused
       ONLY_WHITE_LISTED_VALIDATORS: "true" #if false, all validators will be considered
       ONLY_REGISTERED_ADDRESSES: "true" #if false, all delegators will be rewarded
       POLKADOT_RPC: "http://34.93.40.96:4443/"
       PRE_SHARED_KEY: "abcd1234"
-      CONTRACT_ADDRESS: "0x4a629725ce263ea11af0cd142aadeba9735a9bbd"
+      DISTRIBUTION_CONTRACT_ADDRESS: "0xb15eA07D076C88894935831beb3D1534"
+      STAKE_REGISTRY_CONTRACT_ADDRESS: "0xD995616f40a53910d619e961fca7c06BFc518Bae"
       FEED_URL: "http://172.17.0.1:3000/polkadot"
+      VALIDATE_TRANSACTION_HASH: "false"
     volumes:
       - ./backend:/home/app
     ports:

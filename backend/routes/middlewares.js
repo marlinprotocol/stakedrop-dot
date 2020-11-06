@@ -110,6 +110,10 @@ const unregisterAddress = () => async (req, res, next) => {
 };
 
 const validateTransactionHash = () => async (req, res, next) => {
+  if (process.env.VALIDATE_TRANSACTION_HASH.toUpperCase() == "FALSE") {
+    return next();
+  }
+
   try {
     let { ethereumAddress, stakingAddress } = req.body;
     if (ethereumAddress.length == 42) {
