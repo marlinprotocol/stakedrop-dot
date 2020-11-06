@@ -40,8 +40,6 @@ const {
 
 const contractDetails = require("../config/contracts");
 
-module.exports = router;
-
 router.get("/welcome", async (req, res, next) => {
   return res.status(httpStatus.OK).json({
     message: "Welcome! to polkadot server",
@@ -200,3 +198,5 @@ router.get("/getWhitelistedValidators", async (req, res, next) => {
   let data = await getWhiteListedValidators();
   return res.status(httpStatus.OK).json(data);
 });
+
+module.exports = router;
