@@ -103,7 +103,7 @@ router.get(
 router.post(
   "/register",
   validate(registerPayload),
-  // validateTransactionHash(),
+  validateTransactionHash(),
   checkRegisterPayload(),
   r1(),
   r2(),
@@ -119,7 +119,7 @@ router.post(
 router.post(
   "/unregister",
   validate(unregisterPayload),
-  // validateTransactionHash(),
+  validateTransactionHash(),
   checkUnregisterPayload(),
   u1(),
   async (req, res, next) => {
