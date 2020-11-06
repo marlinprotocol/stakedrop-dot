@@ -50,15 +50,21 @@ async function init() {
     await addAddresses([
       {
         address: "14GvFJE8hqLyQFXkiEvGkTVtbTRGMU4wRC6jNHHKXykPnLA1",
-        ethereumAddress: "0xFC57cBd6d372d25678ecFDC50f95cA6759b3162b".toLowerCase(),
+        ethereumAddress: "0xFC57cBd6d372d25678ecFDC50f95cA6759b3162b"
+          .toLowerCase()
+          .split("x")[1],
       },
       {
         address: "16HvKyV9B61hsop3ZY6pWYeV537S29kd9pb9FMrPzx49ym5X",
-        ethereumAddress: "0x025D3b4caCcc57D8D2485130AEE349F8C60Ab738".toLowerCase(),
+        ethereumAddress: "0x025D3b4caCcc57D8D2485130AEE349F8C60Ab738"
+          .toLowerCase()
+          .split("x")[1],
       },
       {
         address: "14z4r6EJMkCeQyxrAuHfdbVJRESA3veXDcTxcViHuMj5dEEA",
-        ethereumAddress: "0xdeFF2Cd841Bd47592760cE068a113b8E594F8553".toLowerCase(),
+        ethereumAddress: "0xdeFF2Cd841Bd47592760cE068a113b8E594F8553"
+          .toLowerCase()
+          .split("x")[1],
       },
     ]);
   }
