@@ -150,8 +150,8 @@ router.get(
 
 router.post(
   "/addWhiteListedValidator",
-  onlyAdmin(),
   validate(validatorListingPayload),
+  onlyAdmin(),
   checkValidatorPayload(),
   async (req, res, next) => {
     let status = await addValidator(req.body);
@@ -162,10 +162,11 @@ router.post(
     }
   }
 );
+
 router.post(
   "/removeWhiteListedValidator",
-  onlyAdmin(),
   validate(validatorListingPayload),
+  onlyAdmin(),
   checkValidatorPayload(),
   checkValidatorBeforeRemoval(),
   async (req, res, next) => {
