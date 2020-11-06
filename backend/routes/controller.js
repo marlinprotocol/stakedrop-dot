@@ -193,7 +193,9 @@ async function averageStakePerEpoch() {
     const element = _data[index];
     average = average.plus(new Bignumber(element.value));
   }
-  average = average.dividedBy(new Bignumber(_data.length));
+  if(_data.length != 0){
+    average = average.dividedBy(new Bignumber(_data.length));
+  }
   return average.toNumber();
 }
 
