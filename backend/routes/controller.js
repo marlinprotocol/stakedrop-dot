@@ -165,15 +165,25 @@ async function getTransaction(txHash) {
 }
 
 async function addValidator(obj) {
-  let { validatorAddress } = obj;
-  await new whitelistedValidators({ validatorAddress }).save();
-  return true;
+  try {
+    let { validatorAddress } = obj;
+    await new whitelistedValidators({ validatorAddress }).save();
+    return true;
+  } catch (ex) {
+    console.log(ex);
+    return false;
+  }
 }
 
 async function removeValidator(obj) {
-  let { validatorAddress } = obj;
-  await whitelistedValidators.deleteOne({ validatorAddress });
-  return true;
+  try {
+    let { validatorAddress } = obj;
+    await whitelistedValidators.deleteOne({ validatorAddress });
+    return true;
+  } catch (ex) {
+    console.log(ex);
+    return false;
+  }
 }
 
 async function averageStakePerEpoch() {
