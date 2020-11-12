@@ -20,6 +20,11 @@ const axios = require("axios");
 const feederUrl = process.env.FEED_URL;
 const Bignumber = require("bignumber.js");
 
+async function latestEraForStakeDrop() {
+  let _data = await params.findOne({ param: polkadotConstants.feederEra });
+  return _data.value;
+}
+
 async function totalValueLocked() {
   let totalStake = await totalStakes
     .find({})
@@ -262,10 +267,31 @@ async function getStakeData(delegatorAddress) {
       });
     }
   }
+
+  let rewardStake = new Bignumber(0);
+  let totalStake = new Bignumber(0);
+
+  for (let index = 0; index < stakeElligibleForReward.length; index++) {
+    const element = stakeElligibleForReward[index];
+    rewardStake.plus(new Bignumber(element.value));
+    totalStake.plus(new Bignumber(element.value));
+  }
+  for (let index = 0; index < stakeBeforeRegistration.length; index++) {
+    const element = stakeBeforeRegistration[index];
+    totalStake.plus(new Bignumber(element.value));
+  }
+
+  for (
+    let index = 0;
+    index < stakeDelegatedToBlackListedValidator.length;
+    index++
+  ) {
+    const element = stakeDelegatedToBlackListedValidator[index];
+    totalStake.plus(new Bignumber(element.value));
+  }
   return {
-    stakeElligibleForReward,
-    stakeBeforeRegistration,
-    stakeDelegatedToBlackListedValidator,
+    rewardStake: rewardStake.toNumber(),
+    totalStake: totalStake.toNumber(),
   };
 }
 
@@ -282,4 +308,5 @@ module.exports = {
   removeValidator,
   averageStakePerEpoch,
   getWhiteListedValidators,
+  latestEraForStakeDrop,
 };

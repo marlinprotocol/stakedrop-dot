@@ -15,6 +15,7 @@ const {
   averageStakePerEpoch,
   getStakeData,
   getWhiteListedValidators,
+  latestEraForStakeDrop,
 } = require("./controller");
 
 const {
@@ -53,6 +54,13 @@ router.post("/welcome", async (req, res, next) => {
 });
 
 router.get("/getTotalValueLocked", async (req, res, next) => {
+  let value = await totalValueLocked();
+  return res.status(httpStatus.OK).json({
+    value,
+  });
+});
+
+router.get("/getTotalStakeInPool", async (req, res, next) => {
   let value = await totalValueLocked();
   return res.status(httpStatus.OK).json({
     value,
@@ -196,6 +204,20 @@ router.get(
 router.get("/getWhitelistedValidators", async (req, res, next) => {
   let data = await getWhiteListedValidators();
   return res.status(httpStatus.OK).json(data);
+});
+
+router.get("/latestEra", async (req, res, next) => {
+  let data = await latestEraForStakeDrop();
+  return res.status(httpStatus.OK).json({
+    era: data,
+  });
+});
+
+router.get("/latestEpoch", async (req, res, next) => {
+  let data = await latestEraForStakeDrop();
+  return res.status(httpStatus.OK).json({
+    epoch: data,
+  });
 });
 
 module.exports = router;
