@@ -20,15 +20,15 @@ services:
     build: ./backend
     environment:
       NODE_ENV: dev
-      CHAIN_START_ERA: 1 # the era at which chain starts rewarding the delegators
+      CHAIN_START_ERA: 21 # the era at which chain starts rewarding the delegators
       CHAIN_START_BLOCK: 1 # the block at which chain starts parsing
       STAKE_DROP: "start" # if other value or undefined, stake drop will be paused
       ONLY_WHITE_LISTED_VALIDATORS: "true" #if false, all validators will be considered
       ONLY_REGISTERED_ADDRESSES: "true" #if false, all delegators will be rewarded
       POLKADOT_RPC: "http://34.93.40.96:4443/"
       PRE_SHARED_KEY: "abcd1234"
-      DISTRIBUTION_CONTRACT_ADDRESS: "0xc35b20e3d369705b5C2c272b64cE892D6d3510b7"
-      STAKE_REGISTRY_CONTRACT_ADDRESS: "0xdf9CFAA3ceb56f6BB20c73fFf190069972220FF0"
+      DISTRIBUTION_CONTRACT_ADDRESS: "0x1D7c8a6C547Ab62A02f06fe16FAE915910aaa312"
+      STAKE_REGISTRY_CONTRACT_ADDRESS: "0xc30690473Ca33280681c4B995CBC57C91EC6Ac4e"
       FEED_URL: "http://172.17.0.1:3000/polkadot"
       VALIDATE_TRANSACTION_HASH: "false"
     volumes:
