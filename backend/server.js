@@ -17,12 +17,12 @@ const cors = function (req, res, next) {
 const jsonParser = bodyParser.json();
 const urlParser = bodyParser.urlencoded({ extended: true });
 
-// const swaggerUi = require("swagger-ui-express"),
-//   swaggerDocument = require("./swagger.json");
+const swaggerUi = require("swagger-ui-express"),
+  swaggerDocument = require("./swagger.json");
 
 app.use([cors, jsonParser, urlParser]);
 
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/", router);
 
 app.listen(port, () => console.log(`server started on port ${port}!`));

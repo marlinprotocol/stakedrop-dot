@@ -1,0 +1,626 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "2.1.1",
+      "title": "Stake-drop",
+      "description": "API Documentation of Stake-Drop"
+    },
+    "host": "34.93.40.96:3000",
+    "basePath": "/",
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/getTotalValueLocked": {
+        "get": {
+          "summary": "Returns Total Native Stake Tokens Locked in the latest Epoch",
+          "description": "The value returned is automatically updated when the native chain moves to new epoch.",
+          "tags": [
+            "General"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Value returned in least count of the native chain tokens. In polkadot 1 Dot = 10e10 planks",
+              "schema": {
+                "$ref": "#/definitions/Value"
+              }
+            }
+          }
+        }
+      },
+      "/getTotalStakeInPool": {
+        "get": {
+          "summary": "Returns Total Native Stake Tokens Locked in the latest Epoch",
+          "description": "The value returned is automatically updated when the native chain moves to new epoch.",
+          "tags": [
+            "General"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Value returned in least count of the native chain tokens. In polkadot 1 Dot = 10e10 planks",
+              "schema": {
+                "$ref": "#/definitions/Value"
+              }
+            }
+          }
+        }
+      },
+      "/generateDepositAddress/{stakingAddress}/{ethereumAddress}": {
+        "get": {
+          "summary": "Generates a unique Polkadot address for every stakingAddress and ethereumAddress pair",
+          "description": "To generated address a user must send 0 DOTs to confirm the registration",
+          "tags": [
+            "Registration"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "stakingAddress",
+              "in": "path",
+              "description": "This should your staking address. The address through which you are staking on polkadot chain",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "ethereumAddress",
+              "in": "path",
+              "description": "This should be your ethereum address, to which you are expected to receive your rewards",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Returns a unique address",
+              "schema": {
+                "$ref": "#/definitions/Address"
+              }
+            }
+          }
+        }
+      },
+      "/removeWhiteListedValidator": {
+        "post": {
+          "summary": "Remove a whitelisted validator",
+          "description": "Removes an existing validator from the stake-drop. The effects take place from next era.",
+          "tags": [
+            "onlyAdmin"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Validator"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Returns a boolean value true on successfully removing the validator from the stake drop list",
+              "schema": {
+                "$ref": "#/definitions/Status"
+              }
+            }
+          }
+        }
+      },
+      "/addWhiteListedValidator": {
+        "post": {
+          "summary": "Adds a whitelisted validator",
+          "description": "Add a new validator to the stake-drop. The effects take place in next era",
+          "tags": [
+            "onlyAdmin"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Validator"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Returns a boolean value true on successfully adding the validator to the stake drop list",
+              "schema": {
+                "$ref": "#/definitions/Status"
+              }
+            }
+          }
+        }
+      },
+      "/averageStakePerEpoch": {
+        "get": {
+          "summary": "Average Stake Per Epoch in last 10 epochs",
+          "description": "Returns the average stake in last 10 epochs that have been considered for stake-drop",
+          "tags": [
+            "General"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Value"
+              }
+            }
+          }
+        }
+      },
+      "/stakingData/{stakingAddress}": {
+        "get": {
+          "summary": "Return data specific to address that is elligible for stake-drop",
+          "description": "Return data specific to address that is elligible for stake-drop.",
+          "tags": [
+            "General"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "stakingAddress",
+              "in": "path",
+              "description": "This should your staking address. The address through which you are staking on polkadot chain",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/StakeData"
+              }
+            }
+          }
+        }
+      },
+      "/getWhitelistedValidators": {
+        "get": {
+          "summary": "Returns the current list of whitelisted validators whose delegators are elligible for stake drop",
+          "description": "The list is dynamic and can changed only by admin",
+          "tags": [
+            "General"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ValidatorList"
+              }
+            }
+          }
+        }
+      },
+      "/latestEpoch": {
+        "get": {
+          "summary": "Returns the latest Epoch on which stake-drop is operating",
+          "description": "Returns the latest Epoch on which stake-drop is operating",
+          "tags": [
+            "General"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Epoch"
+              }
+            }
+          }
+        }
+      },
+      "/isEthereumAddressAvailable/{ethereumAddress}": {
+        "get": {
+          "summary": "Check if the ethereum address is already registered for stake-drop reward",
+          "description": "If it is not registerec, it can be used for registration, else it can be used to populate the page with rewards",
+          "tags": [
+            "Registration",
+            "General"
+          ],
+          "parameters": [
+            {
+              "name": "ethereumAddress",
+              "in": "path",
+              "description": "This should be your ethereum address, to which you are expected to receive your rewards",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Status"
+              }
+            },
+            "409": {
+              "description": "Indicated that the address is already occupied",
+              "schema": {
+                "$ref": "#/definitions/RegisteredPair"
+              }
+            }
+          }
+        }
+      },
+      "/isStakingAddressAvailable/{stakingAddress}": {
+        "get": {
+          "summary": "Check if the staking address is already registered for the stake drop reward.",
+          "description": "If it is not registerec, it can be used for registration, else it can be used to populate the page with rewards",
+          "tags": [
+            "Registration",
+            "General"
+          ],
+          "parameters": [
+            {
+              "name": "stakingAddress",
+              "in": "path",
+              "description": "This should be the staking address that you will be using on polkadot network for staking",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Status"
+              }
+            },
+            "409": {
+              "description": "Indicated that the address is already occupied",
+              "schema": {
+                "$ref": "#/definitions/RegisteredPair"
+              }
+            }
+          }
+        }
+      },
+      "/register": {
+        "post": {
+          "summary": "Register delegator address for stake drop rewards.",
+          "description": "Register delegator address for stake drop rewards.",
+          "tags": [
+            "Registration"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/RegisterPayload"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Status"
+              }
+            }
+          }
+        }
+      },
+      "/unregister": {
+        "post": {
+          "summary": "Unregister delegator address for stake drop rewards.",
+          "description": "unregister for stake-drop. If you want to change your reward address, you can use this API and register again",
+          "tags": [
+            "Registration"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UnregisterPayload"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Status"
+              }
+            }
+          }
+        }
+      },
+      "/contractAddress": {
+        "get": {
+          "summary": "Returns the ABI and contracts address that will be used in the stake-drop webpage",
+          "description": "Returns the ABI and contracts address that will be used in the stake-drop webpage",
+          "tags": [
+            "General"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/ContractData"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tags": [
+      {
+        "name": "General",
+        "description": "APIs related to page description"
+      },
+      {
+        "name": "Registration",
+        "description": "APIs that may be used for registration"
+      },
+      {
+        "name": "onlyAdmin",
+        "description": "The end points are strictly for platform admins"
+      }
+    ],
+    "definitions": {
+      "ContractData": {
+        "required": [
+          "distribution",
+          "stakeRegistry",
+          "token"
+        ],
+        "properties": {
+          "distribution": {
+            "type": "object",
+            "required": [
+              "abi",
+              "address"
+            ],
+            "properties": {
+              "abi": {
+                "type": "object"
+              },
+              "address": {
+                "type": "string"
+              }
+            }
+          },
+          "stakeRegistry": {
+            "type": "object",
+            "required": [
+              "abi",
+              "address"
+            ],
+            "properties": {
+              "abi": {
+                "type": "object"
+              },
+              "address": {
+                "type": "string"
+              }
+            }
+          },
+          "token": {
+            "type": "object",
+            "required": [
+              "abi",
+              "address"
+            ],
+            "properties": {
+              "abi": {
+                "type": "object"
+              },
+              "address": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "RegisteredPair": {
+        "required": [
+          "status",
+          "stakingAddress",
+          "ethereumAddress"
+        ],
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "example": false
+          },
+          "stakingAddress": {
+            "type": "string",
+            "example": "14GvFJE8hqLyQFXkiEvGkTVtbTRGMU4wRC6jNHHKXykPnLA1"
+          },
+          "ethereumAddress": {
+            "type": "string",
+            "example": "fc57cbd6d372d25678ecfdc50f95ca6759b3162b"
+          }
+        }
+      },
+      "Epoch": {
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "example": 166
+          }
+        }
+      },
+      "Value": {
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "number",
+            "example": 123423123
+          }
+        }
+      },
+      "Address": {
+        "required": [
+          "address"
+        ],
+        "properties": {
+          "address": {
+            "type": "string",
+            "example": "5G6L98fT2d7VDGSTogVEYsmU2LP9JMVKXeCzJE16hwJ3xw9r"
+          }
+        }
+      },
+      "Validator": {
+        "required": [
+          "key",
+          "validatorAddress"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "example": "a very long password @123"
+          },
+          "validatorAddress": {
+            "type": "string",
+            "example": "167f5SpFqXtEKEShxjKVWG2YbmrzLuLAL1DFNZcMGDxRgFhM"
+          }
+        }
+      },
+      "Status": {
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StakeData": {
+        "required": [
+          "rewardStake",
+          "totalStake"
+        ],
+        "description": "Percentage can be calculated by dividing rewardStake with totalStake",
+        "properties": {
+          "rewardStake": {
+            "type": "number",
+            "example": 123123,
+            "description": "This is the stake elligible for reward"
+          },
+          "totalStake": {
+            "type": "number",
+            "example": 12312341,
+            "description": "This is the total stake that address has staked on chain"
+          }
+        }
+      },
+      "ValidatorList": {
+        "type": "array",
+        "example": [
+          "14bARWgpfEiURUS7sGGb54V6mvteRhYWDovcjnFMsLfxRxVV",
+          "1hJdgnAPSjfuHZFHzcorPnFvekSHihK9jdNPWHXgeuL7zaJ"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "RegisterPayload": {
+        "required": [
+          "stakingAddress",
+          "ethereumAddress",
+          "transactionHash"
+        ],
+        "properties": {
+          "stakingAddress": {
+            "type": "string",
+            "example": "14bARWgpfEiURUS7sGGb54V6mvteRhYWDovcjnFMsLfxRxVV"
+          },
+          "ethereumAddress": {
+            "type": "string",
+            "example": "025d3b4caccc57d8d2485130aee349f8c60ab738"
+          },
+          "transactionHash": {
+            "type": "string",
+            "example": "Some valid transaction hash"
+          }
+        }
+      },
+      "UnregisterPayload": {
+        "required": [
+          "stakingAddress",
+          "transactionHash"
+        ],
+        "properties": {
+          "stakingAddress": {
+            "type": "string",
+            "example": "14bARWgpfEiURUS7sGGb54V6mvteRhYWDovcjnFMsLfxRxVV"
+          },
+          "transactionHash": {
+            "type": "string",
+            "example": "Some valid transaction hash"
+          }
+        }
+      }
+    }
+  }

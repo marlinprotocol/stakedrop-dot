@@ -86,7 +86,10 @@ router.get(
   async (req, res, next) => {
     let result = await isEthereumAddressRegistered(req.params);
     if (result.status) {
-      return res.status(httpStatus.CONFLICT).json(result);
+      let {ethereumAddress, stakingAddress} = result;
+      return res.status(httpStatus.CONFLICT).json({
+        status: false, ethereumAddress, stakingAddress
+      });
     } else {
       return res.status(httpStatus.OK).json({
         status: true,
@@ -101,7 +104,10 @@ router.get(
   async (req, res, next) => {
     let result = await isStakingAddressRegistered(req.params);
     if (result.status) {
-      return res.status(httpStatus.CONFLICT).json(result);
+      let {ethereumAddress, stakingAddress} = result;
+      return res.status(httpStatus.CONFLICT).json({
+        status: false, ethereumAddress, stakingAddress
+      });
     } else {
       return res.status(httpStatus.OK).json({ status: true });
     }
