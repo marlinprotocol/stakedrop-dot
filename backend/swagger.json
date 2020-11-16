@@ -405,6 +405,26 @@
             }
           }
         }
+      },
+      "/approximateRewardPerBlock": {
+        "get": {
+          "summary": "Returns approximate number of reward per block",
+          "description": "Currently in dev",
+          "tags": [
+            "dev"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Value"
+              }
+            }
+          }
+        }
       }
     },
     "tags": [
@@ -419,6 +439,10 @@
       {
         "name": "onlyAdmin",
         "description": "The end points are strictly for platform admins"
+      },
+      {
+        "name": "dev",
+        "description": "The values returned in this section of APIs are static/experimental and only schema are correct."
       }
     ],
     "definitions": {

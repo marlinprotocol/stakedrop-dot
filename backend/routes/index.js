@@ -86,9 +86,11 @@ router.get(
   async (req, res, next) => {
     let result = await isEthereumAddressRegistered(req.params);
     if (result.status) {
-      let {ethereumAddress, stakingAddress} = result;
+      let { ethereumAddress, stakingAddress } = result;
       return res.status(httpStatus.CONFLICT).json({
-        status: false, ethereumAddress, stakingAddress
+        status: false,
+        ethereumAddress,
+        stakingAddress,
       });
     } else {
       return res.status(httpStatus.OK).json({
@@ -104,9 +106,11 @@ router.get(
   async (req, res, next) => {
     let result = await isStakingAddressRegistered(req.params);
     if (result.status) {
-      let {ethereumAddress, stakingAddress} = result;
+      let { ethereumAddress, stakingAddress } = result;
       return res.status(httpStatus.CONFLICT).json({
-        status: false, ethereumAddress, stakingAddress
+        status: false,
+        ethereumAddress,
+        stakingAddress,
       });
     } else {
       return res.status(httpStatus.OK).json({ status: true });
@@ -223,6 +227,12 @@ router.get("/latestEpoch", async (req, res, next) => {
   let data = await latestEraForStakeDrop();
   return res.status(httpStatus.OK).json({
     epoch: data,
+  });
+});
+
+router.get("/approximateRewardPerBlock", async (req, res, next) => {
+  return res.status(httpStatus.OK).json({
+    value: 123,
   });
 });
 
