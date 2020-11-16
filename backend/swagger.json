@@ -5,7 +5,7 @@
       "title": "Stake-drop",
       "description": "API Documentation of Stake-Drop"
     },
-    "host": "34.93.40.96:3000",
+    "host": "34.93.40.96:3001",
     "basePath": "/",
     "schemes": [
       "http"
