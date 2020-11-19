@@ -236,7 +236,6 @@ router.get("/approximateRewardPerBlock", async (req, res, next) => {
   });
 });
 
-
 router.get("/approximateRewardPerDay", async (req, res, next) => {
   return res.status(httpStatus.OK).json({
     value: 1e18,

@@ -2,9 +2,43 @@ const distributionAbi = require("./distributionAbi.json");
 const stakeRegistryAbi = require("./stakeRegistryAbi.json");
 const tokenAbi = require("./tokenAbi.json");
 
-const distributionAddress = process.env.DISTRIBUTION_CONTRACT_ADDRESS;
-const stakeRegistryAddress = process.env.STAKE_REGISTRY_CONTRACT_ADDRESS;
-const tokenAddress = process.env.TOKEN_CONTRACT_ADDRESS;
+// # // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// # // Distribution address 0x7b45587B7a993aE4481A713de4a4b487C05308C2
+// # // ValidatorRegistry address 0x56dF8F7306DceECf9Bb91b2ee861032D575E0972
+// # // StakeRegistry address 0x04149a2cCb98f649302BbdCc4a3D7118B7ABcAf5
+// # // AddressRegistry address 0x63B222F4222ac71DE4be09A06cE5C4Fd0B5a2635
+// # // mPondLogic address 0x49F86fAff3cf45C66872b1C1135f309Cd6468DB9
+// # // mPondProxy address 0x9c2B9044e1e52f2fAC04A4A843C2d4cE9f5Ff3f0
+// # // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+//  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Distribution address 0x27F9C69F1a95E1283D71F876687E5fC72ecD1116
+// ValidatorRegistry address 0xC1423350f37c6F4a6E9F96435d50D70f95bBE499
+// StakeRegistry address 0x22BDBd03753298df08f2103BCaDD0a53922A34c6
+// AddressRegistry address 0x6094367346ef75c7ae080Fdb46b0e8C8f378583d
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// const tokenAddress = "0xD439a0f22e0d8020764Db754efd7Af78100c6389"; // this was deployed from remix browser
+
+const network = {
+  KOVAN: {
+    DISTRIBUTION_CONTRACT_ADDRESS: "0x7b45587B7a993aE4481A713de4a4b487C05308C2",
+    STAKE_REGISTRY_CONTRACT_ADDRESS:
+      "0x04149a2cCb98f649302BbdCc4a3D7118B7ABcAf5",
+    TOKEN_CONTRACT_ADDRESS: "0x9c2B9044e1e52f2fAC04A4A843C2d4cE9f5Ff3f0",
+  },
+  MATIC_MUMBAI: {
+    DISTRIBUTION_CONTRACT_ADDRESS: "0x27F9C69F1a95E1283D71F876687E5fC72ecD1116",
+    STAKE_REGISTRY_CONTRACT_ADDRESS:
+      "0x22BDBd03753298df08f2103BCaDD0a53922A34c6",
+    TOKEN_CONTRACT_ADDRESS: "0xD439a0f22e0d8020764Db754efd7Af78100c6389",
+  },
+};
+
+const distributionAddress =
+  network[process.env.NETWORK].DISTRIBUTION_CONTRACT_ADDRESS;
+const stakeRegistryAddress =
+  network[process.env.NETWORK].STAKE_REGISTRY_CONTRACT_ADDRESS;
+const tokenAddress = network[process.env.NETWORK].TOKEN_CONTRACT_ADDRESS;
 
 module.exports = {
   distribution: { abi: distributionAbi, address: distributionAddress },
