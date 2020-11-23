@@ -19,6 +19,7 @@ const registrationConfirmationBlocks =
 const checkEthereumAddress = () => async (req, res, next) => {
   try {
     let { ethereumAddress } = req.params;
+    ethereumAddress = ethereumAddress.trim();
     if (ethereum_address.isAddress(ethereumAddress)) {
       return next();
     } else {
@@ -32,6 +33,7 @@ const checkEthereumAddress = () => async (req, res, next) => {
 const checkPolkadotAddress = () => async (req, res, next) => {
   try {
     let { stakingAddress } = req.params;
+    stakingAddress = stakingAddress.trim();
     keyring.addFromAddress(stakingAddress);
     return next();
   } catch (error) {
