@@ -123,6 +123,9 @@ const validateTransactionHash = () => async (req, res, next) => {
     }
     ethereumAddress = ethereumAddress.toLowerCase();
     let { transactionHash } = req.body;
+    if(transactionHash.slice(0,2) != "0x"){
+      transactionHash = "0x"+ transactionHash
+    }
     let _data = await transactions.findOne({ transactionHash });
     if (_data) {
       let { method, args, blockNumber } = _data;
