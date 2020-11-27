@@ -101,9 +101,6 @@ async function newS1_Operation(validatorEra) {
     for (let index = 0; index < validatorsData.length; index++) {
       const element = validatorsData[index];
       // console.log(element);
-      console.log(
-        `Validator: ${element.validatorAddress} data sent via API call`
-      );
       let toFeed = {
         validatorAddress: element.validatorAddress,
         era: element.era,
@@ -111,6 +108,9 @@ async function newS1_Operation(validatorEra) {
       };
       // throw new Error("Validators need to be added");
       await axios.post(feederUrl + "/addValidator", toFeed);
+      console.log(
+        `Validator: ${element.validatorAddress} data sent via API call`
+      );
       await validators.updateOne({ _id: element._id }, { pushedToChain: true });
     }
   }
@@ -119,7 +119,10 @@ async function newS1_Operation(validatorEra) {
 async function newS2_Operation(freezeEra) {
   // freeze (freezeEra.value) api call for etherum
   // increase freezeEra.value by 1
-  await axios.post(feederUrl + "/freezeEpoch", freezeEra);
+  let toFeed = {
+    value: freezeEra.value,
+  };
+  await axios.post(feederUrl + "/freezeEpoch", toFeed);
   console.log(`Freeze Era ${freezeEra.value} called via API Call`);
   await params.updateOne({ param: freezeEra.param }, { $inc: { value: 1 } });
   return;
