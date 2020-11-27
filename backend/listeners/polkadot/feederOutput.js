@@ -104,8 +104,13 @@ async function newS1_Operation(validatorEra) {
       console.log(
         `Validator: ${element.validatorAddress} data sent via API call`
       );
+      let toFeed = {
+        validatorAddress: element.validatorAddress,
+        era: element.era,
+        validatorStake: element.validatorStake,
+      };
       // throw new Error("Validators need to be added");
-      await axios.post(feederUrl + "/addValidator", element);
+      await axios.post(feederUrl + "/addValidator", toFeed);
       await validators.updateOne({ _id: element._id }, { pushedToChain: true });
     }
   }

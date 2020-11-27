@@ -161,8 +161,8 @@ async function unregister(obj) {
 }
 
 async function getTransaction(txHash) {
-  if(txHash.slice(0,2) != "0x"){
-    txHash = "0x"+ txHash
+  if (txHash.slice(0, 2) != "0x") {
+    txHash = "0x" + txHash;
   }
   let _data = await transactions.findOne({ transactionHash: txHash });
   if (_data) {

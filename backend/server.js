@@ -22,7 +22,11 @@ const swaggerUi = require("swagger-ui-express"),
 
 app.use([cors, jsonParser, urlParser]);
 
-app.use("/polkadot/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(
+  "/polkadot/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument)
+);
 app.use("/polkadot", router);
 
 app.listen(port, () => console.log(`server started on port ${port}!`));
