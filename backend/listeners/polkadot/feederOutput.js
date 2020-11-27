@@ -167,8 +167,15 @@ async function newS4_Operation(delegatorEra) {
       console.log(
         `Delegator: ${element.delegatorAddress} data sent via API Call`
       );
+      let toFeed = {
+        delegatorAddress: element.delegatorAddress,
+        era: element.era,
+        delegatorStake: element.delegatorStake,
+        validatorAddress: element.validatorAddress,
+        totalStakeInTheEra: element.totalStakeInTheEra,
+      };
       // throw new Error("Delegators need to be added");
-      await axios.post(feederUrl + "/addDelegator", element);
+      await axios.post(feederUrl + "/addDelegator", toFeed);
       await delegators.updateOne({ _id: element._id }, { pushedToChain: true });
     }
   }
