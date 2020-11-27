@@ -134,7 +134,11 @@ async function newS3_Operation(totalEra) {
   if (totalStake) {
     stake = totalStake.value;
   }
-  await axios.post(feederUrl + "/addTotalStake", { era: totalEra, stake });
+  let toFeed = {
+    era: totalEra.value,
+    totalStake: stake,
+  };
+  await axios.post(feederUrl + "/addTotalStake", toFeed);
   console.log(`Total Era ${totalEra.value} called via API Call`);
   await params.updateOne({ param: totalEra.param }, { $inc: { value: 1 } });
   return;
