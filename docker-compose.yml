@@ -11,12 +11,13 @@ services:
       ONLY_REGISTERED_ADDRESSES: "true" #if false, all delegators will be rewarded
       PRE_SHARED_KEY: "abcd1234"
       POLKADOT_RPC: "http://34.93.40.96:4443/"
-      NETWORK: "KOVAN"
+      NETWORK: "MATIC_MUMBAI"
       FEED_URL: "http://172.17.0.1:3000/polkadot"
       MONGO_URL: 172.17.0.1:27017
       MONGO_DB_NAME: stakeDrop
       MONGO_USER: stake
       MONGO_PASSWORD: stakePassword
       VALIDATE_TRANSACTION_HASH: "true"
+      MONGO_CONNECTION: "mongo:27017" #change this in prod
     ports:
       - 3001:3000

@@ -27,9 +27,9 @@ services:
       ONLY_REGISTERED_ADDRESSES: "true" #if false, all delegators will be rewarded
       POLKADOT_RPC: "http://34.93.40.96:4443/"
       PRE_SHARED_KEY: "abcd1234"
-      NETWORK: "KOVAN"
+      NETWORK: "MATIC_MUMBAI"
       FEED_URL: "http://172.17.0.1:3000/polkadot"
-      VALIDATE_TRANSACTION_HASH: "false"
+      VALIDATE_TRANSACTION_HASH: "true"
     volumes:
       - ./backend:/home/app
     ports:
