@@ -138,7 +138,7 @@ const validateTransactionHash = () => async (req, res, next) => {
         if (registrationDetails) {
           let addressToReceive =
             registrationDetails.depositDetails.pair.address;
-          if (dest == addressToReceive) {
+          if (dest == keyring.encodeAddress(addressToReceive, 0)) {
             let latestBlock = await params.find(polkadotConstants.latestBlock);
             if (
               latestBlock.value >

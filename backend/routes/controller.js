@@ -65,7 +65,7 @@ async function getDepositAddress(obj) {
       ethereumAddress,
       depositDetails: result,
     }).save();
-    return result.pair.address;
+    return keyring.encodeAddress(result.pair.address, 0);
   }
 }
 
