@@ -34,7 +34,8 @@ const prodEnvParams = [
   "MONGO_DB_NAME",
   "POLKADOT_RPC",
   "VALIDATE_TRANSACTION_HASH",
-  "NETWORK", "MONGO_CONNECTION"
+  "NETWORK",
+  "MONGO_CONNECTION",
 ];
 
 if (process.env.NODE_ENV == "prod") {

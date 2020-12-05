@@ -72,7 +72,7 @@ async function storeTransactions(extrensics, blockNumber) {
     const { method, section } = element.method;
     const signer = element.signer;
     const { args } = extrensics[index]._raw.method.toJSON();
-    const txHash = getTxHash(extrensics[index]);
+    const txHash = getTxHash(extrensics[index].toHex());
 
     if (signer) {
       let newtransaction = new transaction({
