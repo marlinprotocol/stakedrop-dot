@@ -82,7 +82,7 @@ async function saveValidators() {
                     element.who
                   );
                   if (!isRegistered) {
-                    console.log(`Delegator: ${element.who} is not registered`);
+                    // console.log(`Delegator: ${element.who} is not registered`);
                     isRegisteredAddress = false;
                   }
                 }
@@ -97,7 +97,7 @@ async function saveValidators() {
               }
             }
             await polkadot.updateValidatorConfirmedEra(confirmedEra.value + 1);
-            await induceDelay(5000);
+            await induceDelay(20 * 600);
           }
         }
       } else {
@@ -115,6 +115,7 @@ module.exports = saveValidators;
 
 function induceDelay(ts) {
   let delay = ts || 3000;
+  console.log(`Induce Delay ${delay}`);
   return new Promise((resolve) => {
     setTimeout(function () {
       resolve();

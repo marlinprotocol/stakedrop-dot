@@ -10,9 +10,9 @@ async function updateEra() {
         currentEra.toHuman()
       );
       await polkadot.updateLatestBlock();
-      console.log("******************************");
-      console.log({ totalStake, currentEra: currentEra.toHuman() });
-      console.log("******************************");
+      // console.log("******************************");
+      // console.log({ totalStake, currentEra: currentEra.toHuman() });
+      // console.log("******************************");
     } catch (error) {
       console.log(error);
       await induceDelay(60000);

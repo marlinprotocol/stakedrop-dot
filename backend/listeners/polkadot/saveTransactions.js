@@ -59,14 +59,14 @@ function induceDelay(ts) {
 
 async function storeTransactions(extrensics, blockNumber) {
   if (blockNumber % 100 == 0) {
-    console.log(`storing block ${blockNumber} transaction in db`);
+    // console.log(`storing block ${blockNumber} and its transaction in db`);
   }
   let tx = extrensics.map((ex) => ex.toHuman());
   for (let index = 0; index < tx.length; index++) {
     if (!(blockNumber % 100) && (index % 5 == 0 || index == tx.length - 1)) {
-      console.log(
-        `Storing transaction ${index}/${tx.length} in block: ${blockNumber}`
-      );
+      // console.log(
+      //   `Storing transaction ${index}/${tx.length} in block: ${blockNumber}`
+      // );
     }
     const element = tx[index];
     const { method, section } = element.method;

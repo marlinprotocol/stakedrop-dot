@@ -20,7 +20,7 @@ services:
     build: ./backend
     environment:
       NODE_ENV: dev
-      CHAIN_START_ERA: 187 # the era at which chain starts rewarding the delegators
+      CHAIN_START_ERA: 1 # the era at which chain starts rewarding the delegators
       CHAIN_START_BLOCK: 1 # the block at which chain starts parsing
       STAKE_DROP: "start" # if other value or undefined, stake drop will be paused
       ONLY_WHITE_LISTED_VALIDATORS: "true" #if false, all validators will be considered
@@ -29,7 +29,7 @@ services:
       PRE_SHARED_KEY: "abcd1234"
       NETWORK: "MATIC_MUMBAI"
       FEED_URL: "http://172.17.0.1:3000/polkadot"
-      VALIDATE_TRANSACTION_HASH: "false"
+      VALIDATE_TRANSACTION_HASH: "true"
     volumes:
       - ./backend:/home/app
     ports:
