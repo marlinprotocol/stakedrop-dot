@@ -272,12 +272,6 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Status"
-            }
-          },
-          "409": {
-            "description": "Indicated that the address is already occupied",
-            "schema": {
               "$ref": "#/definitions/RegisteredPair"
             }
           }
@@ -307,12 +301,6 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Status"
-            }
-          },
-          "409": {
-            "description": "Indicated that the address is already occupied",
             "schema": {
               "$ref": "#/definitions/RegisteredPair"
             }
@@ -522,9 +510,7 @@
     },
     "RegisteredPair": {
       "required": [
-        "status",
-        "stakingAddress",
-        "ethereumAddress"
+        "status"
       ],
       "properties": {
         "status": {
