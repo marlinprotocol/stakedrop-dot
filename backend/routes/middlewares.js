@@ -127,16 +127,17 @@ const validateTransactionHash = () => async (req, res, next) => {
       transactionHash = "0x" + transactionHash;
     }
     let _data = await transactions.findOne({ transactionHash });
-    console.log(`Transaction hash submitted ${transactionHash}`,_data);
-    return next("Stopped temp");
     if (_data) {
       let { method, args, blockNumber } = _data;
-      if (method == "transfer") {
+      if (method == "transfer" || method == "transferKeepAlive") {
         let { dest } = args;
         let registrationDetails = await registrations.findOne({
           address: stakingAddress,
           ethereumAddress,
         });
+        console.log(registrationDetails);
+        console.log(_data);
+        throw new Error("Checking Registration details")
         if (registrationDetails) {
           let addressToReceive =
             registrationDetails.depositDetails.pair.address;
