@@ -127,7 +127,7 @@ const validateTransactionHash = () => async (req, res, next) => {
       transactionHash = "0x" + transactionHash;
     }
     let _data = await transactions.findOne({ transactionHash });
-    console.log(`Transaction hash submitted ${transactionHash}`,{_data});
+    console.log(`Transaction hash submitted ${transactionHash}`,{data);
     return next("Stopped temp");
     if (_data) {
       let { method, args, blockNumber } = _data;
