@@ -230,8 +230,28 @@
     },
     "/latestEpoch": {
       "get": {
-        "summary": "Returns the latest Epoch on which stake-drop is operating",
-        "description": "Returns the latest Epoch on which stake-drop is operating",
+        "summary": "Returns the latest Era on which stake-drop is operating",
+        "description": "Returns the latest Era on which stake-drop is operating",
+        "tags": [
+          "Depricated"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Epoch"
+            }
+          }
+        }
+      }
+    },
+    "/latestEra": {
+      "get": {
+        "summary": "Returns the latest Era on which stake-drop is operating",
+        "description": "Returns the latest Era on which stake-drop is operating",
         "tags": [
           "General"
         ],
@@ -450,7 +470,11 @@
     },
     {
       "name": "dev",
-      "description": "The values returned in this section of APIs are static/experimental and only schema are correct."
+      "description": "The values returned in this section of APIs are static/experimental and only schema are correct.;"
+    },
+    {
+      "name": "Depricated",
+      "description": "Don't build these."
     }
   ],
   "definitions": {
