@@ -124,11 +124,11 @@ async function register(obj) {
         return obj.validatorAddress;
       });
     }
+    await new registeredAddresses({ address, ethereumAddress }).save();
     await axios.post(feederUrl + "/addAddress", {
       stakingAddress: address,
       ethereumAddress: "0x" + ethereumAddress,
     });
-    await new registeredAddresses({ address, ethereumAddress }).save();
     return { status: true, info };
   } catch (error) {
     console.log(error);
