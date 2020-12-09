@@ -132,7 +132,7 @@ const validateTransactionHash = () => async (req, res, next) => {
       if (method == "transfer" || method == "transferKeepAlive") {
         let { dest } = args;
         let registrationDetails = await registrations.findOne({
-          address: stakingAddress,
+          stakingAddress,
           ethereumAddress,
         });
         console.log({ ethereumAddress, stakingAddress });
