@@ -119,7 +119,7 @@ const validateTransactionHash = () => async (req, res, next) => {
   try {
     let { ethereumAddress, stakingAddress } = req.body;
     if (ethereumAddress.length == 42) {
-      ethereumAddress = ethereumAddress.split("x")[1];
+      ethereumAddress = ethereumAddress.split("x")[1].toLowerCase();
     }
     ethereumAddress = ethereumAddress.toLowerCase();
     let { transactionHash } = req.body;
@@ -135,7 +135,7 @@ const validateTransactionHash = () => async (req, res, next) => {
           address: stakingAddress,
           ethereumAddress,
         });
-        console.log(req.body);
+        console.log({ ethereumAddress, stakingAddress });
         console.log(registrationDetails);
         console.log(_data);
         throw new Error("Checking Registration details")
