@@ -135,6 +135,7 @@ const validateTransactionHash = () => async (req, res, next) => {
           address: stakingAddress,
           ethereumAddress,
         });
+        console.log(req.body);
         console.log(registrationDetails);
         console.log(_data);
         throw new Error("Checking Registration details")
