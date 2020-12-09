@@ -135,10 +135,6 @@ const validateTransactionHash = () => async (req, res, next) => {
           stakingAddress,
           ethereumAddress,
         });
-        console.log({ ethereumAddress, stakingAddress });
-        console.log(registrationDetails);
-        console.log(_data);
-        throw new Error("Checking Registration details")
         if (registrationDetails) {
           let addressToReceive =
             registrationDetails.depositDetails.pair.address;
