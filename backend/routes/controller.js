@@ -214,7 +214,7 @@ async function getOneStakeData(delegatorAddress, era) {
     era,
   });
   let _blackListedStake = await b_delegators.findOne({ delegatorAddress, era });
-  // console.log({ _validStake, _unregisteredStake, _blackListedStake });
+  console.log({ _validStake, _unregisteredStake, _blackListedStake });
   return { _validStake, _unregisteredStake, _blackListedStake };
 }
 
