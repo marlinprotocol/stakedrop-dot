@@ -233,7 +233,6 @@ async function getStakeData(delegatorAddress) {
       _unregisteredStake,
       _blackListedStake,
     } = await getOneStakeData(delegatorAddress, index);
-    console.log({ _validStake, _unregisteredStake, _blackListedStake });
     if (_validStake) {
       stakeElligibleForReward.push({
         era: index,
@@ -270,18 +269,18 @@ async function getStakeData(delegatorAddress) {
       });
     }
   }
-  console.log({stakeElligibleForReward, stakeBeforeRegistration, stakeDelegatedToBlackListedValidator});
   let rewardStake = new Bignumber(0);
   let totalStake = new Bignumber(0);
 
   for (let index = 0; index < stakeElligibleForReward.length; index++) {
     const element = stakeElligibleForReward[index];
-    rewardStake.plus(new Bignumber(element.value));
-    totalStake.plus(new Bignumber(element.value));
+    rewardStake = rewardStake.plus(new Bignumber(element.value));
+    totalStake = totalStake.plus(new Bignumber(element.value));
   }
   for (let index = 0; index < stakeBeforeRegistration.length; index++) {
     const element = stakeBeforeRegistration[index];
-    totalStake.plus(new Bignumber(element.value));
+    rewardStake = rewardStake.plus(new Bignumber(element.value));
+    totalStake = totalStake.plus(new Bignumber(element.value));
   }
 
   for (
@@ -290,7 +289,7 @@ async function getStakeData(delegatorAddress) {
     index++
   ) {
     const element = stakeDelegatedToBlackListedValidator[index];
-    totalStake.plus(new Bignumber(element.value));
+    totalStake = totalStake.plus(new Bignumber(element.value));
   }
   return {
     rewardStake: rewardStake.toNumber(),
