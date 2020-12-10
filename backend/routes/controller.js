@@ -214,7 +214,7 @@ async function getOneStakeData(delegatorAddress, era) {
     era,
   });
   let _blackListedStake = await b_delegators.findOne({ delegatorAddress, era });
-  console.log({ _validStake, _unregisteredStake, _blackListedStake });
+  // console.log({ _validStake, _unregisteredStake, _blackListedStake });
   return { _validStake, _unregisteredStake, _blackListedStake };
 }
 
@@ -233,7 +233,7 @@ async function getStakeData(delegatorAddress) {
       _unregisteredStake,
       _blackListedStake,
     } = await getOneStakeData(delegatorAddress, index);
-
+    console.log({ _validStake, _unregisteredStake, _blackListedStake });
     if (_validStake) {
       stakeElligibleForReward.push({
         era: index,
@@ -270,7 +270,7 @@ async function getStakeData(delegatorAddress) {
       });
     }
   }
-
+  console.log({stakeElligibleForReward, stakeBeforeRegistration, stakeDelegatedToBlackListedValidator});
   let rewardStake = new Bignumber(0);
   let totalStake = new Bignumber(0);
 
