@@ -124,11 +124,11 @@ async function register(obj) {
         return obj.validatorAddress;
       });
     }
-    await new registeredAddresses({ address, ethereumAddress }).save();
     await axios.post(feederUrl + "/addAddress", {
       stakingAddress: address,
       ethereumAddress: "0x" + ethereumAddress,
     });
+    await new registeredAddresses({ address, ethereumAddress }).save();
     return { status: true, info };
   } catch (error) {
     console.log(error);
@@ -214,7 +214,7 @@ async function getOneStakeData(delegatorAddress, era) {
     era,
   });
   let _blackListedStake = await b_delegators.findOne({ delegatorAddress, era });
-  // console.log({ _validStake, _unregisteredStake, _blackListedStake });
+  console.log({ _validStake, _unregisteredStake, _blackListedStake });
   return { _validStake, _unregisteredStake, _blackListedStake };
 }
 
