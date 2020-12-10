@@ -273,16 +273,16 @@ async function getStakeData(delegatorAddress) {
   let totalStake = new Bignumber(0);
 
   console.log(stakeElligibleForReward, stakeBeforeRegistration, stakeDelegatedToBlackListedValidator);
-  
+
   for (let index = 0; index < stakeElligibleForReward.length; index++) {
     const element = stakeElligibleForReward[index];
-    rewardStake = rewardStake.plus(new Bignumber(element.value));
-    totalStake = totalStake.plus(new Bignumber(element.value));
+    rewardStake = rewardStake.plus(new Bignumber(element.stake));
+    totalStake = totalStake.plus(new Bignumber(element.stake));
   }
   for (let index = 0; index < stakeBeforeRegistration.length; index++) {
     const element = stakeBeforeRegistration[index];
-    rewardStake = rewardStake.plus(new Bignumber(element.value));
-    totalStake = totalStake.plus(new Bignumber(element.value));
+    rewardStake = rewardStake.plus(new Bignumber(element.stake));
+    totalStake = totalStake.plus(new Bignumber(element.stake));
   }
 
   for (
@@ -291,7 +291,7 @@ async function getStakeData(delegatorAddress) {
     index++
   ) {
     const element = stakeDelegatedToBlackListedValidator[index];
-    totalStake = totalStake.plus(new Bignumber(element.value));
+    totalStake = totalStake.plus(new Bignumber(element.stake));
   }
   return {
     rewardStake: rewardStake.toNumber(),
