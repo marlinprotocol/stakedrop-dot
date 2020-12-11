@@ -13,6 +13,6 @@ services:
       NETWORK: "MATIC"
       FEED_URL: "http://172.17.0.1:3000/polkadot" # change this in prod
       VALIDATE_TRANSACTION_HASH: "true"
-      MONGO_CONNECTION: "mongo:27017" #change this in prod
+      MONGO_CONNECTION: "mongodb://admin:password@172.17.0.1:27017/admin" #change this in prod
     ports:
       - 3001:3000

@@ -59,7 +59,7 @@ async function pumpFeed() {
         } else {
           throw new Error(`Feeder detected unknown state ${state}`);
         }
-        // await induceDelay(15000);
+        await induceDelay(60000);
       } else {
         await induceDelay(60000);
       }
