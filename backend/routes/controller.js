@@ -25,6 +25,17 @@ async function latestEraForStakeDrop() {
   return _data.value;
 }
 
+async function stats() {
+  let _data = await params.find();
+  let _data = _data.map(function (obj) {
+    return {
+      param: obj.param,
+      value: obj.value,
+    };
+  });
+  return _data;
+}
+
 async function totalValueLocked() {
   let totalStake = await totalStakes
     .find({})
@@ -313,4 +324,5 @@ module.exports = {
   averageStakePerEpoch,
   getWhiteListedValidators,
   latestEraForStakeDrop,
+  stats,
 };
