@@ -27,7 +27,7 @@ async function latestEraForStakeDrop() {
 
 async function stats() {
   let _data = await params.find();
-  let _data = _data.map(function (obj) {
+  _data = _data.map(function (obj) {
     return {
       param: obj.param,
       value: obj.value,
