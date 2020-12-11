@@ -57,7 +57,7 @@ async function getDepositAddress(obj) {
   let _data = await registrations.findOne({ stakingAddress, ethereumAddress });
   if (_data) {
     //   console.log(_data.depositDetails.pair);
-    return _data.depositDetails.pair.address;
+    return keyring.encodeAddress(_data.depositDetails.pair.address, 0);
   } else {
     let result = await createNewPair();
     await new registrations({
