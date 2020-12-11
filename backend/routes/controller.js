@@ -272,7 +272,7 @@ async function getStakeData(delegatorAddress) {
   let rewardStake = new Bignumber(0);
   let totalStake = new Bignumber(0);
 
-  console.log(stakeElligibleForReward, stakeBeforeRegistration, stakeDelegatedToBlackListedValidator);
+  // console.log(stakeElligibleForReward, stakeBeforeRegistration, stakeDelegatedToBlackListedValidator);
 
   for (let index = 0; index < stakeElligibleForReward.length; index++) {
     const element = stakeElligibleForReward[index];

@@ -211,6 +211,15 @@ router.get(
   }
 );
 
+router.get(
+  "/stakingData/:stakingAddress",
+  checkPolkadotAddress(),
+  async (req, res, next) => {
+    let data = await getStakeData(req.params.stakingAddress);
+    return res.status(httpStatus.OK).json(data);
+  }
+);
+
 router.get("/getWhitelistedValidators", async (req, res, next) => {
   let data = await getWhiteListedValidators();
   return res.status(httpStatus.OK).json(data);
