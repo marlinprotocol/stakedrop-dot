@@ -16,6 +16,7 @@ const {
   getStakeData,
   getWhiteListedValidators,
   latestEraForStakeDrop,
+  stats,
 } = require("./controller");
 
 const {
@@ -51,6 +52,11 @@ router.post("/welcome", async (req, res, next) => {
   return res.status(httpStatus.OK).json({
     message: "Welcome! to polkadot server",
   });
+});
+
+router.stats("/stats", async (req, res, next) => {
+  let _data = await stats();
+  return res.status(httpStatus.OK).json(_data);
 });
 
 router.get("/getTotalValueLocked", async (req, res, next) => {
