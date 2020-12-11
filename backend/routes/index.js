@@ -54,7 +54,7 @@ router.post("/welcome", async (req, res, next) => {
   });
 });
 
-router.stats("/stats", async (req, res, next) => {
+router.get("/stats", async (req, res, next) => {
   let _data = await stats();
   return res.status(httpStatus.OK).json(_data);
 });
