@@ -19,7 +19,22 @@ const tokenAbi = require("./tokenAbi.json");
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // const tokenAddress = "0xD439a0f22e0d8020764Db754efd7Af78100c6389"; // this was deployed from remix browser
 
+// polkadot (source: 0xAFCE0a493E59665d9B3a2A845A166c34E27B11dD) (rewardPerEpoch: 365000000000000000)
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// Distribution address 0x175fa5aDC16Df1819832CDcDd5fc513Ba3B8c206
+// ValidatorRegistry address 0xbfcF2159eEF214De2C0810dA653c4a0a36Bd4921
+// StakeRegistry address 0x189822D70222db1E2411EeA9953637906e04D0CE
+// AddressRegistry address 0xa9Df661074D195b21086ef65162695350426F02C
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// ERC 677BridgeToken: 0xF9c7483851017744FE0A5D79607AC609619B9eA7
+
 const network = {
+  MATIC: {
+    DISTRIBUTION_CONTRACT_ADDRESS: "0x175fa5aDC16Df1819832CDcDd5fc513Ba3B8c206",
+    STAKE_REGISTRY_CONTRACT_ADDRESS:
+      "0x189822D70222db1E2411EeA9953637906e04D0CE",
+    TOKEN_CONTRACT_ADDRESS: "0xF9c7483851017744FE0A5D79607AC609619B9eA7",
+  },
   KOVAN: {
     DISTRIBUTION_CONTRACT_ADDRESS: "0x7b45587B7a993aE4481A713de4a4b487C05308C2",
     STAKE_REGISTRY_CONTRACT_ADDRESS:

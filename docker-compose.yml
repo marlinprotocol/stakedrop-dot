@@ -4,19 +4,14 @@ services:
     build: ./backend
     environment:
       NODE_ENV: prod
-      CHAIN_START_ERA: 154 # the era at which chain starts rewarding the delegators
+      CHAIN_START_ERA: 190 # the era at which chain starts rewarding the delegators
       CHAIN_START_BLOCK: 2000000 # the block at which chain starts parsing
       STAKE_DROP: "start" # if other value or undefined, stake drop will be paused
       ONLY_WHITE_LISTED_VALIDATORS: "true" #if false, all validators will be considered
       ONLY_REGISTERED_ADDRESSES: "true" #if false, all delegators will be rewarded
-      PRE_SHARED_KEY: "abcd1234"
-      POLKADOT_RPC: "http://34.93.40.96:4443/"
-      NETWORK: "MATIC_MUMBAI"
-      FEED_URL: "http://172.17.0.1:3000/polkadot"
-      MONGO_URL: 172.17.0.1:27017
-      MONGO_DB_NAME: stakeDrop
-      MONGO_USER: stake
-      MONGO_PASSWORD: stakePassword
+      POLKADOT_RPC: "http://34.93.40.96:4443/" # change it in prod if needed
+      NETWORK: "MATIC"
+      FEED_URL: "http://172.17.0.1:3000/polkadot" # change this in prod
       VALIDATE_TRANSACTION_HASH: "true"
       MONGO_CONNECTION: "mongo:27017" #change this in prod
     ports:
