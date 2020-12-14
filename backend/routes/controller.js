@@ -25,6 +25,17 @@ async function latestEraForStakeDrop() {
   return _data.value;
 }
 
+async function stats() {
+  let _data = await params.find();
+  _data = _data.map(function (obj) {
+    return {
+      param: obj.param,
+      value: obj.value,
+    };
+  });
+  return _data;
+}
+
 async function totalValueLocked() {
   let totalStake = await totalStakes
     .find({})
@@ -57,7 +68,7 @@ async function getDepositAddress(obj) {
   let _data = await registrations.findOne({ stakingAddress, ethereumAddress });
   if (_data) {
     //   console.log(_data.depositDetails.pair);
-    return _data.depositDetails.pair.address;
+    return keyring.encodeAddress(_data.depositDetails.pair.address, 0);
   } else {
     let result = await createNewPair();
     await new registrations({
@@ -313,4 +324,5 @@ module.exports = {
   averageStakePerEpoch,
   getWhiteListedValidators,
   latestEraForStakeDrop,
+  stats,
 };
