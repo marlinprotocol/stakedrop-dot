@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 80;
 
 const bodyParser = require("body-parser");
 const router = require("./routes");
@@ -20,7 +20,7 @@ const urlParser = bodyParser.urlencoded({ extended: true });
 const swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./swagger.json");
 
-app.use([cors, jsonParser, urlParser]);
+app.use([jsonParser, urlParser]);
 
 app.use(
   "/polkadot/api-docs",
