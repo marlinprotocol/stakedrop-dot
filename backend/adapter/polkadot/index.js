@@ -98,7 +98,21 @@ async function saveValidator(
       console.log(`Validator: ${validatorAddress} in era ${era} already added`);
     }
   }
-  return { status: true };
+  let _isValidatorAlsoRegisteredAsDelegator = await isRegisteredAddress(
+    validatorAddress
+  );
+  if (!_isValidatorAlsoRegisteredAsDelegator) {
+    return { status: true };
+  }
+  await saveDelegator(
+    validatorAddress,
+    era,
+    validatorStake,
+    validatorCollectedStake,
+    validatorAddress,
+    { isRegisteredAddress: true, isValidatorWhiteListed: true }
+  );
+  return {status: true}
 }
 
 async function isValidatorWhiteListed(validatorAddress) {
@@ -222,5 +236,5 @@ function induceDelay(ts) {
     setTimeout(function () {
       resolve();
     }, delay);
-  })
+  });
 }
