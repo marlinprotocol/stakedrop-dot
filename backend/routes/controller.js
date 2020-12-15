@@ -7,6 +7,7 @@ const {
   delegators,
   u_delegators,
   whitelistedValidators,
+  validators,
   params,
 } = require("../models");
 
@@ -310,6 +311,43 @@ async function getStakeData(delegatorAddress) {
   };
 }
 
+async function checkTotalStakes() {
+  let _data = await totalStakes.find();
+  _data = _data.map(function (obj) {
+    return {
+      value: obj.value,
+      era: obj.era,
+    };
+  });
+  return _data;
+}
+
+async function checkTotalDelegators() {
+  let _data = await delegators.find();
+  _data = _data.map(function (obj) {
+    return {
+      delegatorAddress: obj.delegatorAddress,
+      era: obj.era,
+      delegatorStake: obj.delegatorStake,
+      validatorAddress: obj.validatorAddress,
+    };
+  });
+  return _data;
+}
+
+async function checkTotalValidators() {
+  let _data = await validators.find();
+  _data = _data.map(function (obj) {
+    return {
+      validatorAddress: obj.validatorAddress,
+      era: obj.era,
+      validatorStake: obj.validatorStake,
+      validatorCollectedStake: obj.validatorCollectedStake,
+    };
+  });
+  return _data;
+}
+
 module.exports = {
   getStakeData,
   totalValueLocked,
@@ -325,4 +363,7 @@ module.exports = {
   getWhiteListedValidators,
   latestEraForStakeDrop,
   stats,
+  checkTotalStakes,
+  checkTotalDelegators,
+  checkTotalValidators,
 };

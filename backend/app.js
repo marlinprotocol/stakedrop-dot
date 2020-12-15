@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 require("./config/checkEnv");
 const { ApiPromise, WsProvider } = require("@polkadot/api");
 const { HttpProvider } = require("@polkadot/rpc-provider");

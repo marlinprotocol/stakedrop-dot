@@ -17,6 +17,9 @@ const {
   getWhiteListedValidators,
   latestEraForStakeDrop,
   stats,
+  checkTotalStakes,
+  checkTotalDelegators,
+  checkTotalValidators,
 } = require("./controller");
 
 const {
@@ -255,6 +258,22 @@ router.get("/approximateRewardPerDay", async (req, res, next) => {
   return res.status(httpStatus.OK).json({
     value: 1e18,
   });
+});
+
+//
+router.get("/checkTotalStakes", async (req, res, next) => {
+  let _data = await checkTotalStakes();
+  return res.status(httpStatus.OK).json(_data);
+});
+
+router.get("/checkTotalDelegators", async (req, res, next) => {
+  let _data = await checkTotalDelegators();
+  return res.status(httpStatus.OK).json(_data);
+});
+
+router.get("/checkTotalValidators", async (req, res, next) => {
+  let _data = await checkTotalValidators();
+  return res.status(httpStatus.OK).json(_data);
 });
 
 module.exports = router;

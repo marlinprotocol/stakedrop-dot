@@ -4,8 +4,8 @@ services:
     build: ./backend
     environment:
       NODE_ENV: prod
-      CHAIN_START_ERA: 190 # the era at which chain starts rewarding the delegators
-      CHAIN_START_BLOCK: 2856258 # the block at which chain starts parsing
+      CHAIN_START_ERA: 196 # the era at which chain starts rewarding the delegators
+      CHAIN_START_BLOCK: 2904165 # the block at which chain starts parsing
       STAKE_DROP: "start" # if other value or undefined, stake drop will be paused
       ONLY_WHITE_LISTED_VALIDATORS: "true" #if false, all validators will be considered
       ONLY_REGISTERED_ADDRESSES: "true" #if false, all delegators will be rewarded
