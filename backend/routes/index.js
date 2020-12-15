@@ -140,19 +140,19 @@ router.post(
   }
 );
 
-router.post(
-  "/unregister",
-  validate(unregisterPayload),
-  validateTransactionHash(),
-  checkUnregisterPayload(),
-  u1(),
-  async (req, res, next) => {
-    let { status } = await unregister(req.body);
-    return res.status(httpStatus.OK).json({
-      status,
-    });
-  }
-);
+// router.post(
+//   "/unregister",
+//   validate(unregisterPayload),
+//   validateTransactionHash(),
+//   checkUnregisterPayload(),
+//   u1(),
+//   async (req, res, next) => {
+//     let { status } = await unregister(req.body);
+//     return res.status(httpStatus.OK).json({
+//       status,
+//     });
+//   }
+// );
 
 router.get("/contractAddress", async (req, res, next) => {
   return res.status(httpStatus.OK).json(contractDetails);
@@ -172,36 +172,36 @@ router.get(
   }
 );
 
-router.post(
-  "/addWhiteListedValidator",
-  validate(validatorListingPayload),
-  onlyAdmin(),
-  checkValidatorPayload(),
-  async (req, res, next) => {
-    let status = await addValidator(req.body);
-    if (status) {
-      return res.status(httpStatus.OK).json({ status });
-    } else {
-      return res.status(httpStatus.NOT_MODIFIED).json({ status });
-    }
-  }
-);
+// router.post(
+//   "/addWhiteListedValidator",
+//   validate(validatorListingPayload),
+//   onlyAdmin(),
+//   checkValidatorPayload(),
+//   async (req, res, next) => {
+//     let status = await addValidator(req.body);
+//     if (status) {
+//       return res.status(httpStatus.OK).json({ status });
+//     } else {
+//       return res.status(httpStatus.NOT_MODIFIED).json({ status });
+//     }
+//   }
+// );
 
-router.post(
-  "/removeWhiteListedValidator",
-  validate(validatorListingPayload),
-  onlyAdmin(),
-  checkValidatorPayload(),
-  checkValidatorBeforeRemoval(),
-  async (req, res, next) => {
-    let status = await removeValidator(req.body);
-    if (status) {
-      return res.status(httpStatus.OK).json({ status });
-    } else {
-      return res.status(httpStatus.NOT_MODIFIED).json({ status });
-    }
-  }
-);
+// router.post(
+//   "/removeWhiteListedValidator",
+//   validate(validatorListingPayload),
+//   onlyAdmin(),
+//   checkValidatorPayload(),
+//   checkValidatorBeforeRemoval(),
+//   async (req, res, next) => {
+//     let status = await removeValidator(req.body);
+//     if (status) {
+//       return res.status(httpStatus.OK).json({ status });
+//     } else {
+//       return res.status(httpStatus.NOT_MODIFIED).json({ status });
+//     }
+//   }
+// );
 
 router.get("/averageStakePerEpoch", async (req, res, next) => {
   let value = await averageStakePerEpoch();
