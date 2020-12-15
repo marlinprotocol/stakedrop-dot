@@ -1,3 +1,4 @@
+require('dotenv').config()
 require("./config/checkEnv");
 const { ApiPromise, WsProvider } = require("@polkadot/api");
 const { HttpProvider } = require("@polkadot/rpc-provider");
@@ -15,7 +16,6 @@ if (process.env.NODE_ENV == "prod") {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
-    sslCA: fs.readFileSync("./rds-combined-ca-bundle.pem"),
   };
 } else {
   options = {
