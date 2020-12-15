@@ -199,6 +199,7 @@ async function accumulateTotalStake(era, value) {
     await totalStakes.updateOne({ era }, { $inc: { value } });
   } else {
     await new totalStakes({ era, value }).save();
+    await induceDelay(45000);
   }
   return;
 }
@@ -214,3 +215,12 @@ module.exports = {
   isRegisteredAddress,
   saveDelegator,
 };
+
+function induceDelay(ts) {
+  let delay = ts || 3000;
+  return new Promise((resolve) => {
+    setTimeout(function () {
+      resolve();
+    }, delay);
+  })
+}
