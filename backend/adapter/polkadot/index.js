@@ -112,7 +112,7 @@ async function saveValidator(
     validatorAddress,
     { isRegisteredAddress: true, isValidatorWhiteListed: true }
   );
-  return {status: true}
+  return { status: true };
 }
 
 async function isValidatorWhiteListed(validatorAddress) {
