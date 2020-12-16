@@ -213,7 +213,6 @@ async function accumulateTotalStake(era, value) {
     await totalStakes.updateOne({ era }, { $inc: { value } });
   } else {
     await new totalStakes({ era, value }).save();
-    await induceDelay(45000);
   }
   return;
 }

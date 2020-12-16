@@ -2,6 +2,7 @@ const { params, validators, delegators, totalStakes } = require("../../models");
 const { polkadot: polkadotConstants } = require("../../constants");
 const { findState } = require("./stateMachine");
 const axios = require("axios");
+const BigNumber = require("bignumber.js");
 const feederUrl = process.env.FEED_URL;
 
 async function pumpFeed() {
@@ -132,7 +133,8 @@ async function newS3_Operation(totalEra) {
   let totalStake = await totalStakes.findOne({ era: totalEra.value });
   let stake = 0;
   if (totalStake) {
-    stake = totalStake.value;
+    let _temp = new BigNumber(totalStake.value).plus(1000); // 1000 buffer
+    stake = parseInt(_temp.toFixed());
   }
   let toFeed = {
     era: totalEra.value,
