@@ -280,6 +280,8 @@ async function getStakeData(delegatorAddress) {
         stake: 0,
       });
     }
+
+    break;
   }
   let rewardStake = new Bignumber(0);
   let totalStake = new Bignumber(0);
