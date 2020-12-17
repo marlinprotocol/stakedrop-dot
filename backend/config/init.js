@@ -39,6 +39,15 @@ async function init() {
 
   if (process.env.NODE_ENV == "dev" || process.env.NODE_ENV == "prod") {
     await addValidator([
+      "15BQUqtqhmqJPyvvEH5GYyWffXWKuAgoSUHuG1UeNdb8oDNT",
+      "15tchmYRA5e1RQZs6PE2Xfq9oxfv86JQBi2yz372sXjovrd7",
+      "13ofm5Yg4FmACJ3torjifcw4z8yPKs4eNZFXXsBkHeJz3qHm",
+      "12KoQFveGCXS5m1uANBZNo22j86GVmaD8i1N6t4UxVaPxKuU",
+      "16Zgx3vsge6VdLW8WYk6hCX1EqgRk61vnJuqZmoYMdwmX2iR",
+      "16ALLQukR3zfhAC9Uzb6HPYHvQWH6hcricDnskc4XL8kvePF",
+      "15QbBVsKoTnshpY7tvntziYYSTD2FyUR15xPiMdpkpJDUygh",
+      "12gkhA8JEz8ywmVj1tsVafSp9C4saKzSofgMwBJcmFJAGUVX",
+      "12wtfs4UfodYT1Y6y8NQsQaduLSJbhz7oaNt1F6gTLFHD1y5",
       "14Q74NU7dG4uxiHTSCSZii5T1Y368cm7BNVNeRWmEuoDUGXQ",
       "14ghKTz5mjZPgGYvgVC9VnFw1HYZmmsnYvSSHFgFTJfMvwQS",
       "13T9UGfntid52aHuaxX1j6uh3zTYzMPMG1Des9Cmvf7K4xfq",
