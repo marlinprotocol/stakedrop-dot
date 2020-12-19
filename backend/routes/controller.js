@@ -337,7 +337,7 @@ async function newGetStakeData(delegatorAddress) {
   if (_delegationData.length != 0) {
     let rewardStake = new Bignumber(0);
     let totalStake = new Bignumber(0);
-    for (let index = 0; _delegationData < array.length; index++) {
+    for (let index = 0; _delegationData < _delegationData.length; index++) {
       const { delegatorStake } = _delegationData[index];
       rewardStake = rewardStake.plus(new Bignumber(rewardStake));
       totalStake = totalStake.plus(new Bignumber(delegatorStake));
