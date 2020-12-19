@@ -351,7 +351,29 @@ async function newGetStakeData(delegatorAddress) {
       totalStake: totalStake.toNumber(),
     });
   }
-  return;
+
+  if (_u_delegationData.length == 0) {
+    let rewardStake = new Bignumber(0);
+    let totalStake = new Bignumber(0);
+    for (let index = 0; index < _u_delegationData.length; index++) {
+      const { delegatorStake } = _u_delegationData[index];
+      rewardStake = rewardStake.plus(new Bignumber(delegatorStake));
+      totalStake = totalStake.plus(new Bignumber(delegatorStake));
+    }
+    for (let index = 0; index < _b_delegationData.length; index++) {
+      const { delegatorStake } = array[index];
+      totalStake = totalStake.plus(new Bignumber(delegatorStake));
+    }
+    console.log({
+      rewardStake: rewardStake.toNumber(),
+      totalStake: totalStake.toNumber(),
+    });
+  }
+
+  return {
+    rewardStake: 0,
+    totalStake: 0,
+  };
 }
 
 async function checkTotalStakes() {
