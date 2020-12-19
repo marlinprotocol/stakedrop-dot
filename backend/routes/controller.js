@@ -346,10 +346,10 @@ async function newGetStakeData(delegatorAddress) {
       const { delegatorStake } = array[index];
       totalStake = totalStake.plus(new Bignumber(delegatorStake));
     }
-    console.log({
+    return {
       rewardStake: rewardStake.toNumber(),
       totalStake: totalStake.toNumber(),
-    });
+    };
   }
 
   if (_u_delegationData.length == 0) {
@@ -364,10 +364,10 @@ async function newGetStakeData(delegatorAddress) {
       const { delegatorStake } = array[index];
       totalStake = totalStake.plus(new Bignumber(delegatorStake));
     }
-    console.log({
+    return {
       rewardStake: rewardStake.toNumber(),
       totalStake: totalStake.toNumber(),
-    });
+    };
   }
 
   return {
@@ -414,7 +414,7 @@ async function checkTotalValidators() {
 }
 
 module.exports = {
-  getStakeData,
+  getStakeData: newGetStakeData,
   totalValueLocked,
   getDepositAddress,
   isEthereumAddressRegistered,
