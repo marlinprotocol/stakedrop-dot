@@ -333,7 +333,7 @@ async function newGetStakeData(delegatorAddress) {
     delegatorAddress,
     era: eraToVerify,
   });
-  console.log(_delegationData, _u_delegationData, _b_delegationData);
+  
   if (_delegationData.length != 0) {
     let rewardStake = new Bignumber(0);
     let totalStake = new Bignumber(0);
