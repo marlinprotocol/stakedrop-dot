@@ -333,8 +333,24 @@ async function newGetStakeData(delegatorAddress) {
     delegatorAddress,
     era: eraToVerify,
   });
-
   console.log(_delegationData, _u_delegationData, _b_delegationData);
+  if (_delegationData.length != 0) {
+    let rewardStake = new Bignumber(0);
+    let totalStake = new Bignumber(0);
+    for (let index = 0; _delegationData < array.length; index++) {
+      const { delegatorStake } = _delegationData[index];
+      rewardStake = rewardStake.plus(new Bignumber(rewardStake));
+      totalStake = totalStake.plus(new Bignumber(delegatorStake));
+    }
+    for (let index = 0; index < _b_delegationData.length; index++) {
+      const { delegatorStake } = array[index];
+      totalStake = totalStake.plus(new Bignumber(delegatorStake));
+    }
+    console.log({
+      rewardStake: rewardStake.toNumber(),
+      totalStake: totalStake.toNumber(),
+    });
+  }
   return;
 }
 
