@@ -20,6 +20,7 @@ const keyring = new Keyring({ type: "sr25519" });
 const axios = require("axios");
 const feederUrl = process.env.FEED_URL;
 const Bignumber = require("bignumber.js");
+const delegator = require("../models/delegator");
 
 async function latestEraForStakeDrop() {
   let _data = await params.findOne({ param: polkadotConstants.feederEra });
@@ -235,6 +236,7 @@ async function getStakeData(delegatorAddress) {
     param: polkadotConstants.feederEra,
   });
 
+  await newGetStakeData(delegatorAddress);
   let stakeElligibleForReward = [];
   let stakeBeforeRegistration = [];
   let stakeDelegatedToBlackListedValidator = [];
@@ -309,6 +311,23 @@ async function getStakeData(delegatorAddress) {
     rewardStake: rewardStake.toNumber(),
     totalStake: totalStake.toNumber(),
   };
+}
+
+async function newGetStakeData(delegatorAddress) {
+  let _delegationData = await delegators
+    .findOne({ delegatorAddress })
+    .sort({ era: "desc" })
+    .exec();
+  let _b_delegationData = await b_delegators
+    .findOne({ delegatorAddress })
+    .sort({ era: "desc" })
+    .exec();
+  let _u_delegationData = await u_delegators
+    .findOne({ delegatorAddress })
+    .sort({ era: "desc" })
+    .exec();
+  console.log({ _delegationData, _b_delegationData, _u_delegationData });
+  return;
 }
 
 async function checkTotalStakes() {
