@@ -316,19 +316,25 @@ async function getStakeData(delegatorAddress) {
 }
 
 async function newGetStakeData(delegatorAddress) {
-  let _delegationData = await delegators
-    .findOne({ delegatorAddress })
-    .sort({ era: "desc" })
-    .exec();
-  let _b_delegationData = await b_delegators
-    .findOne({ delegatorAddress })
-    .sort({ era: "desc" })
-    .exec();
-  let _u_delegationData = await u_delegators
-    .findOne({ delegatorAddress })
-    .sort({ era: "desc" })
-    .exec();
-  console.log({ _delegationData, _b_delegationData, _u_delegationData });
+  let { value: lastConfirmedEra } = await params.findOne({
+    param: polkadotConstants.feederEra,
+  });
+  let eraToVerify = lastConfirmedEra - 1;
+
+  let _delegationData = await delegators.find({
+    delegatorAddress,
+    era: eraToVerify,
+  });
+  let _u_delegationData = await u_delegators.find({
+    delegatorAddress,
+    era: eraToVerify,
+  });
+  let _b_delegationData = await b_delegators.find({
+    delegatorAddress,
+    era: eraToVerify,
+  });
+
+  console.log(_delegationData, _u_delegationData, _b_delegationData);
   return;
 }
 
