@@ -352,7 +352,7 @@ async function newGetStakeData(delegatorAddress) {
     };
   }
 
-  if (_u_delegationData.length == 0) {
+  if (_u_delegationData.length != 0) {
     let rewardStake = new Bignumber(0);
     let totalStake = new Bignumber(0);
     for (let index = 0; index < _u_delegationData.length; index++) {
