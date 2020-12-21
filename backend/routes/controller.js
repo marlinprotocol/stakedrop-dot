@@ -343,7 +343,7 @@ async function newGetStakeData(delegatorAddress) {
       totalStake = totalStake.plus(new Bignumber(delegatorStake));
     }
     for (let index = 0; index < _b_delegationData.length; index++) {
-      const { delegatorStake } = array[index];
+      const { delegatorStake } = _b_delegationData[index];
       totalStake = totalStake.plus(new Bignumber(delegatorStake));
     }
     return {
