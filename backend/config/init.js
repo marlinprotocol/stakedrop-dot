@@ -39,6 +39,7 @@ async function init() {
 
   if (process.env.NODE_ENV == "dev" || process.env.NODE_ENV == "prod") {
     await addValidator([
+      "16aThbzrsb2ohiLXJLqN8jLST6JgUPRi3BqyHxUW4yVHBQ44",
       "16A1zLQ3KjMnxch1NAU44hoijFK3fHUjqb11bVgcHCfoj9z3",
       "14j3azi9gKGx2de7ADL3dkzZXFzTTUy1t3RND21PymHRXRp6",
       "14MDvXHcSfZXacZR3nvbS4XYgpWi2dY65BnthsUnMZU6R1kH",
