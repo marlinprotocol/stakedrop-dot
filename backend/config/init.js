@@ -141,6 +141,7 @@ async function init() {
       "143xeV45MsSeUGFpCns1ACgaUvCeouSJ4WDoppio9qNUNr5S",
       "15a9ScnYeVfQGL9HQtTn3nkUY1DTB8LzEX391yZvFRzJZ9V7",
       "13BeUcLu7hzSTaoKpEtpdqiXKZz6yVfT9exKH6JuTW8RQQvJ",
+      "1RJP5i7zuyBLtgGTMCD9oF8zQMTQvfc4zpKNsVxfvTKdHmr"
     ]);
 
     await removeValidator([
