@@ -39,6 +39,10 @@ async function init() {
 
   if (process.env.NODE_ENV == "dev" || process.env.NODE_ENV == "prod") {
     await addValidator([
+      "15AcyKihrmGs9RD4AHUwRvv6LkhbeDyGH3GVADp1Biv4bfFv",
+      "12bUkY5nrGyoXqBpxKDf88z5VQWzaUK83PCgyHtJ1UN1ujjU",
+      "14j7YcVqpfiZwbrPuwMfcKWuY176cKN1SMHVSZvT7yrfhbnt",
+      "12DsYUto9AcKA4kRz1yLcGh13CTLe7LbUjDkMS8ZY8rCK4rn",
       "16aThbzrsb2ohiLXJLqN8jLST6JgUPRi3BqyHxUW4yVHBQ44",
       "16A1zLQ3KjMnxch1NAU44hoijFK3fHUjqb11bVgcHCfoj9z3",
       "14j3azi9gKGx2de7ADL3dkzZXFzTTUy1t3RND21PymHRXRp6",
@@ -137,6 +141,15 @@ async function init() {
       "143xeV45MsSeUGFpCns1ACgaUvCeouSJ4WDoppio9qNUNr5S",
       "15a9ScnYeVfQGL9HQtTn3nkUY1DTB8LzEX391yZvFRzJZ9V7",
       "13BeUcLu7hzSTaoKpEtpdqiXKZz6yVfT9exKH6JuTW8RQQvJ",
+    ]);
+
+    await removeValidator([
+      "14ibH1yy3Z885hJ7NesyPnfqQTi3e2zX8Pzy3orUzW1rrGy3",
+      "1n3ZhCMUNmSKLQBLxGthHLkQz43hJXd6x2QAJ414iS9hqRZ",
+      "15TAQtkYsif1uB3G8n47Qyw2wpeLK5pcybjdczMSa8qV1FLD",
+      "15ALL6i5WYPcYPVfnKRWgyn9UMR41M6KNG5Z8oegTkL1JF5k",
+      "13dsF8U5e3oKF75R8HoQFmSz1UaGYt4m1fy6bswF9kdKV6hU",
+      "12dvyqCFhVubTDqMdojyjhkxVUMaYVXWLv8uZW1NomUunPmN",
     ]);
   }
 
@@ -260,10 +273,22 @@ async function addValidator(validators) {
   }
 }
 
+async function removeValidator(validators) {
+  for (let index = 0; index < validators.length; index++) {
+    const element = validators[index];
+    await removeWhiteListedValidator(element);
+  }
+}
+
 async function addWhiteListedValidator(validatorAddress) {
   let _validator = await whitelistedValidators.findOne({ validatorAddress });
   if (!_validator) {
     await new whitelistedValidators({ validatorAddress }).save();
   }
+  return;
+}
+
+async function removeWhiteListedValidator(validatorAddress) {
+  await whitelistedValidators.deleteOne({ validatorAddress });
   return;
 }
