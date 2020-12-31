@@ -35,6 +35,11 @@ try {
     })
     .then(function (data) {
       console.log(data);
+      return;
+    })
+    .then(function () {
+      console.log("Exiting the code with status 0");
+      process.exit(0);
     });
 } catch (ex) {
   console.log(ex);
@@ -60,4 +65,5 @@ async function add() {
       await new whitelistedValidators({ validatorAddress: element }).save();
     }
   }
+  return "Add validators";
 }
