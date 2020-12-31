@@ -1,5 +1,22 @@
 require("dotenv").config();
 mongoose = require("mongoose");
+
+var options = {};
+
+if (process.env.NODE_ENV == "prod") {
+  options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  };
+} else {
+  options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  };
+}
+
 try {
   let user = process.env.MONGO_USER || "admin";
   let password = process.env.MONGO_PASSWORD || "password";
