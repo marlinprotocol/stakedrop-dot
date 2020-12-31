@@ -31,7 +31,7 @@ try {
   mongoose
     .connect(connectionString, options)
     .then(function () {
-      return add();
+      return remove();
     })
     .then(function (data) {
       console.log(data);
@@ -46,35 +46,21 @@ try {
   process.exit(1);
 }
 
-// edit this array to push new validators (or)
-// pass new validatorAddress as argument
-let validatorsToAdd = ["14cxMDpBNLsNEXWyCzked3zghzaYWXwoqGT4h12GqQXdVhmn"];
+// edit this array to remove validators (or)
+// pass new validatorremoveress as argument
+let validatorsToRemove = ["14cxMDpBNLsNEXWyCzked3zghzaYWXwoqGT4h12GqQXdVhmn"];
 
-async function add() {
+async function remove() {
   const { whitelistedValidators } = require("../models");
   if (process.argv[2]) {
-    let _data = await whitelistedValidators.findOne({
+    await whitelistedValidators.deleteOne({
       validatorAddress: process.argv[2],
     });
-    if (_data) {
-      console.log(`${process.argv[2]} is already added`);
-    } else {
-      await new whitelistedValidators({
-        validatorAddress: process.argv[2],
-      }).save();
-    }
   } else {
-    for (let index = 0; index < validatorsToAdd.length; index++) {
-      const element = validatorsToAdd[index];
-      let _data = await whitelistedValidators.findOne({
-        validatorAddress: element,
-      });
-      if (_data) {
-        console.log(`${element} is already in db`);
-      } else {
-        await new whitelistedValidators({ validatorAddress: element }).save();
-      }
+    for (let index = 0; index < validatorsToRemove.length; index++) {
+      const element = validatorsToRemove[index];
+      await whitelistedValidators.deleteOne({ validatorAddress: element });
     }
   }
-  return "Add validators";
+  return "Remove validators successful";
 }
