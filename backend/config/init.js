@@ -37,7 +37,7 @@ async function init() {
   await check(polkadot.delegatorStakeFeeder, chainStartEra);
   await check(polkadot.freezeEra, chainStartEra);
 
-  if (process.env.NODE_ENV == "dev") {
+  if (process.env.NODE_ENV == "dev" || process.env.NODE_ENV == "prod") {
     await addValidator([
       "14cxMDpBNLsNEXWyCzked3zghzaYWXwoqGT4h12GqQXdVhmn",
       "15AcyKihrmGs9RD4AHUwRvv6LkhbeDyGH3GVADp1Biv4bfFv",
