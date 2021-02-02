@@ -6,7 +6,9 @@ const {
 } = require("../../models");
 const { polkadot: polkadotConstants } = require("../../constants");
 
-const { getTxHash } = require("@substrate/txwrapper");
+// const {getTxHash} = require("@substrate/txwrapper");
+const { blake2AsHex } = require("@polkadot/util-crypto");
+const getTxHash = (signedTx) => blake2AsHex(signedTx, 256);
 
 async function checkLastConfirmedBlock() {
   while (true) {
