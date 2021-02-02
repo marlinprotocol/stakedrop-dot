@@ -3,7 +3,7 @@ FROM node:10.15-jessie
 RUN cd ~ && mkdir app
 
 COPY package.json /home/app/package.json
-COPY package-lock.json /home/app/package-lock.json
+# COPY package-lock.json /home/app/package-lock.json
 WORKDIR /home/app
 
 RUN rm -rf node_modules
