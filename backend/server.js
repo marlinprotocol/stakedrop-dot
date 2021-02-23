@@ -20,7 +20,11 @@ const urlParser = bodyParser.urlencoded({ extended: true });
 const swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./swagger.json");
 
-app.use([jsonParser, urlParser, cors]);
+if (process.env.NODE_ENV == "dev") {
+  app.use([jsonParser, urlParser, cors]);
+} else {
+  app.use([jsonParser, urlParser]);
+}
 
 app.use(
   "/polkadot/api-docs",
