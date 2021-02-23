@@ -76,6 +76,7 @@ async function storeTransactions(extrensics, blockNumber) {
     const { args } = extrensics[index]._raw.method.toJSON();
     const txHash = getTxHash(extrensics[index].toHex());
 
+    console.log(signer);
     if (signer) {
       let newtransaction = new transaction({
         address: signer,
