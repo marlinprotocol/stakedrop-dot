@@ -151,6 +151,9 @@ async function init() {
       "15a9ScnYeVfQGL9HQtTn3nkUY1DTB8LzEX391yZvFRzJZ9V7",
       "13BeUcLu7hzSTaoKpEtpdqiXKZz6yVfT9exKH6JuTW8RQQvJ",
       "1RJP5i7zuyBLtgGTMCD9oF8zQMTQvfc4zpKNsVxfvTKdHmr",
+      "12dvyqCFhVubTDqMdojyjhkxVUMaYVXWLv8uZW1NomUunPmN",
+      "1RG5T6zGY4XovW75mTgpH6Bx7Y6uwwMmPToMCJSdMwdm4EW",
+      "1LMtHkfrADk7awSEFC45nyDKWxPu9cK796vtrf7Fu3NZQmB",
     ]);
 
     await removeValidator([
@@ -159,7 +162,6 @@ async function init() {
       "15TAQtkYsif1uB3G8n47Qyw2wpeLK5pcybjdczMSa8qV1FLD",
       "15ALL6i5WYPcYPVfnKRWgyn9UMR41M6KNG5Z8oegTkL1JF5k",
       "13dsF8U5e3oKF75R8HoQFmSz1UaGYt4m1fy6bswF9kdKV6hU",
-      "12dvyqCFhVubTDqMdojyjhkxVUMaYVXWLv8uZW1NomUunPmN",
     ]);
   }
 
