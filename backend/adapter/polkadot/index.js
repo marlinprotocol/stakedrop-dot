@@ -141,20 +141,6 @@ async function saveDelegator(
   validatorAddress,
   options
 ) {
-  if (delegatorAddress == "14Uu59k5VLBz3zLMaEe3LBcqRLfKw2VJu2D3krxTssREjDJc") {
-    console.log({
-      delegatorAddress,
-      era,
-      delegatorStake,
-      totalStakeInTheEra,
-      validatorAddress,
-      options,
-    });
-    throw new Error(
-      "14Uu59k5VLBz3zLMaEe3LBcqRLfKw2VJu2D3krxTssREjDJc is halted for testing"
-    );
-  }
-
   let { isRegisteredAddress: isRegistered, isValidatorWhiteListed } = options;
   if (isRegistered) {
     if (isValidatorWhiteListed) {
@@ -177,6 +163,21 @@ async function saveDelegator(
           `Delegator: ${delegatorAddress} with validator: ${validatorAddress} in era ${era} already added`
         );
       }
+      // if (
+      //   delegatorAddress == "14Uu59k5VLBz3zLMaEe3LBcqRLfKw2VJu2D3krxTssREjDJc"
+      // ) {
+      //   console.log({
+      //     delegatorAddress,
+      //     era,
+      //     delegatorStake,
+      //     totalStakeInTheEra,
+      //     validatorAddress,
+      //     options,
+      //   });
+      //   throw new Error(
+      //     "14Uu59k5VLBz3zLMaEe3LBcqRLfKw2VJu2D3krxTssREjDJc is halted for testing"
+      //   );
+      // }
     } else {
       let delegatorData = await b_delegators.findOne({
         delegatorAddress,
